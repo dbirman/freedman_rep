@@ -1,0 +1,700 @@
+[09/03/15 17:15:11] [INFO] Reading configuration file /Users/dan/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/PsiTurk-2.1.2.dev0-py2.7.egg/psiturk/tunnel/ngrok-config
+[09/03/15 17:15:11] [INFO] [client] Trusting root CAs: [assets/client/tls/ngrokroot.crt]
+[09/03/15 17:15:11] [INFO] [view] [web] Serving web interface on 127.0.0.1:4040
+[09/03/15 17:15:11] [EROR] Can't update: insufficient permissions: open /Users/dan/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/PsiTurk-2.1.2.dev0-py2.7.egg/psiturk/tunnel/.ngrok.new: permission denied
+[09/03/15 17:15:11] [INFO] Checking for update
+[09/03/15 17:15:11] [DEBG] [ctl:4696f3b5] New connection to: 173.236.137.204:4443
+[09/03/15 17:15:11] [DEBG] [ctl:4696f3b5] Writing message: {"Type":"Auth","Payload":{"Version":"2","MmVersion":"1.6","User":"","Password":"","OS":"darwin","Arch":"amd64","ClientId":""}}
+[09/03/15 17:15:11] [DEBG] [ctl:4696f3b5] Waiting to read message
+[09/03/15 17:15:11] [DEBG] [ctl:4696f3b5] Reading message with length: 120
+[09/03/15 17:15:11] [DEBG] [ctl:4696f3b5] Read message {"Type":"AuthResp","Payload":{"Version":"2","MmVersion":"1.6","ClientId":"b1432da024a98d1b2c3894eabb843497","Error":""}}
+[09/03/15 17:15:11] [INFO] [client] Authenticated with server, client id: b1432da024a98d1b2c3894eabb843497
+[09/03/15 17:15:11] [DEBG] [ctl:4696f3b5] Writing message: {"Type":"ReqTunnel","Payload":{"ReqId":"acccd82b1eddbab8","Protocol":"http+https","Hostname":"","Subdomain":"czhC8DC2g8JgKt9cegNNH","HttpAuth":"","RemotePort":0}}
+[09/03/15 17:15:11] [DEBG] [ctl:4696f3b5] Waiting to read message
+[09/03/15 17:15:11] [DEBG] [ctl:4696f3b5] Reading message with length: 32
+[09/03/15 17:15:11] [DEBG] [ctl:4696f3b5] Read message {"Type":"ReqProxy","Payload":{}}
+[09/03/15 17:15:11] [DEBG] [ctl:4696f3b5] Waiting to read message
+[09/03/15 17:15:11] [DEBG] [ctl:4696f3b5] Reading message with length: 149
+[09/03/15 17:15:11] [DEBG] [ctl:4696f3b5] Read message {"Type":"NewTunnel","Payload":{"ReqId":"acccd82b1eddbab8","Url":"http://czhc8dc2g8jgkt9cegnnh.tunnel.psiturk.org:8000","Protocol":"http","Error":""}}
+[09/03/15 17:15:11] [INFO] [client] Tunnel established at http://czhc8dc2g8jgkt9cegnnh.tunnel.psiturk.org:8000
+[09/03/15 17:15:11] [DEBG] [ctl:4696f3b5] Waiting to read message
+[09/03/15 17:15:11] [DEBG] [ctl:4696f3b5] Reading message with length: 151
+[09/03/15 17:15:11] [DEBG] [ctl:4696f3b5] Read message {"Type":"NewTunnel","Payload":{"ReqId":"acccd82b1eddbab8","Url":"https://czhc8dc2g8jgkt9cegnnh.tunnel.psiturk.org:8000","Protocol":"https","Error":""}}
+[09/03/15 17:15:11] [INFO] [client] Tunnel established at https://czhc8dc2g8jgkt9cegnnh.tunnel.psiturk.org:8000
+[09/03/15 17:15:11] [DEBG] [ctl:4696f3b5] Waiting to read message
+[09/03/15 17:15:11] [DEBG] [pxy:5d9d949a] New connection to: 173.236.137.204:4443
+[09/03/15 17:15:11] [DEBG] [pxy:5d9d949a] Writing message: {"Type":"RegProxy","Payload":{"ClientId":"b1432da024a98d1b2c3894eabb843497"}}
+[09/03/15 17:15:12] [DEBG] [pxy:5d9d949a] Waiting to read message
+[09/03/15 17:15:22] [DEBG] [ctl:4696f3b5] Reading message with length: 32
+[09/03/15 17:15:22] [DEBG] [ctl:4696f3b5] Read message {"Type":"ReqProxy","Payload":{}}
+[09/03/15 17:15:22] [DEBG] [ctl:4696f3b5] Waiting to read message
+[09/03/15 17:15:22] [DEBG] [pxy:5d9d949a] Reading message with length: 131
+[09/03/15 17:15:22] [DEBG] [pxy:5d9d949a] Read message {"Type":"StartProxy","Payload":{"Url":"http://czhc8dc2g8jgkt9cegnnh.tunnel.psiturk.org:8000","ClientAddr":"208.113.153.219:45364"}}
+[09/03/15 17:15:22] [DEBG] [prv:38e362c] New connection to: 127.0.0.1:5001
+[09/03/15 17:15:22] [INFO] [prv:38e362c] Joined with connection pxy:5d9d949a
+[09/03/15 17:15:22] [DEBG] [prv:38e362c] Copied 167 bytes to pxy:5d9d949a
+[09/03/15 17:15:22] [DEBG] [prv:38e362c] Closing
+[09/03/15 17:15:22] [DEBG] [pxy:5d9d949a] Closing
+[09/03/15 17:15:22] [WARN] [pxy:5d9d949a] Copied 235 bytes to prv:38e362c before failing with error read tcp 173.236.137.204:4443: use of closed network connection
+[09/03/15 17:15:22] [DEBG] [pxy:6db539bb] New connection to: 173.236.137.204:4443
+[09/03/15 17:15:22] [DEBG] [pxy:6db539bb] Writing message: {"Type":"RegProxy","Payload":{"ClientId":"b1432da024a98d1b2c3894eabb843497"}}
+[09/03/15 17:15:22] [DEBG] [pxy:6db539bb] Waiting to read message
+[09/03/15 17:15:22] [DEBG] [ctl:4696f3b5] Reading message with length: 32
+[09/03/15 17:15:22] [DEBG] [ctl:4696f3b5] Read message {"Type":"ReqProxy","Payload":{}}
+[09/03/15 17:15:22] [DEBG] [ctl:4696f3b5] Waiting to read message
+[09/03/15 17:15:22] [DEBG] [pxy:6db539bb] Reading message with length: 127
+[09/03/15 17:15:22] [DEBG] [pxy:6db539bb] Read message {"Type":"StartProxy","Payload":{"Url":"http://czhc8dc2g8jgkt9cegnnh.tunnel.psiturk.org:8000","ClientAddr":"71.173.5.232:4514"}}
+[09/03/15 17:15:22] [DEBG] [prv:411951e4] New connection to: 127.0.0.1:5001
+[09/03/15 17:15:22] [INFO] [prv:411951e4] Joined with connection pxy:6db539bb
+[09/03/15 17:15:22] [DEBG] [pxy:274b76f3] New connection to: 173.236.137.204:4443
+[09/03/15 17:15:22] [DEBG] [pxy:274b76f3] Writing message: {"Type":"RegProxy","Payload":{"ClientId":"b1432da024a98d1b2c3894eabb843497"}}
+[09/03/15 17:15:23] [DEBG] [pxy:274b76f3] Waiting to read message
+[09/03/15 17:15:23] [DEBG] [prv:411951e4] Copied 227 bytes to pxy:6db539bb
+[09/03/15 17:15:23] [DEBG] [prv:411951e4] Closing
+[09/03/15 17:15:23] [DEBG] [pxy:6db539bb] Closing
+[09/03/15 17:15:23] [WARN] [pxy:6db539bb] Copied 451 bytes to prv:411951e4 before failing with error read tcp 173.236.137.204:4443: use of closed network connection
+[09/03/15 17:15:26] [DEBG] [ctl:4696f3b5] Reading message with length: 32
+[09/03/15 17:15:26] [DEBG] [ctl:4696f3b5] Read message {"Type":"ReqProxy","Payload":{}}
+[09/03/15 17:15:26] [DEBG] [ctl:4696f3b5] Waiting to read message
+[09/03/15 17:15:26] [DEBG] [pxy:274b76f3] Reading message with length: 131
+[09/03/15 17:15:26] [DEBG] [pxy:274b76f3] Read message {"Type":"StartProxy","Payload":{"Url":"http://czhc8dc2g8jgkt9cegnnh.tunnel.psiturk.org:8000","ClientAddr":"208.113.153.219:45402"}}
+[09/03/15 17:15:26] [DEBG] [prv:fe2dda1] New connection to: 127.0.0.1:5001
+[09/03/15 17:15:26] [INFO] [prv:fe2dda1] Joined with connection pxy:274b76f3
+[09/03/15 17:15:26] [DEBG] [prv:fe2dda1] Copied 167 bytes to pxy:274b76f3
+[09/03/15 17:15:26] [DEBG] [prv:fe2dda1] Closing
+[09/03/15 17:15:26] [DEBG] [pxy:274b76f3] Closing
+[09/03/15 17:15:26] [WARN] [pxy:274b76f3] Copied 235 bytes to prv:fe2dda1 before failing with error read tcp 173.236.137.204:4443: use of closed network connection
+[09/03/15 17:15:26] [DEBG] [pxy:5b03f2e9] New connection to: 173.236.137.204:4443
+[09/03/15 17:15:26] [DEBG] [pxy:5b03f2e9] Writing message: {"Type":"RegProxy","Payload":{"ClientId":"b1432da024a98d1b2c3894eabb843497"}}
+[09/03/15 17:15:26] [DEBG] [pxy:5b03f2e9] Waiting to read message
+[09/03/15 17:15:26] [DEBG] [ctl:4696f3b5] Reading message with length: 32
+[09/03/15 17:15:26] [DEBG] [ctl:4696f3b5] Read message {"Type":"ReqProxy","Payload":{}}
+[09/03/15 17:15:26] [DEBG] [ctl:4696f3b5] Waiting to read message
+[09/03/15 17:15:26] [DEBG] [pxy:5b03f2e9] Reading message with length: 127
+[09/03/15 17:15:26] [DEBG] [pxy:5b03f2e9] Read message {"Type":"StartProxy","Payload":{"Url":"http://czhc8dc2g8jgkt9cegnnh.tunnel.psiturk.org:8000","ClientAddr":"71.173.5.232:4518"}}
+[09/03/15 17:15:26] [DEBG] [prv:72e85c08] New connection to: 127.0.0.1:5001
+[09/03/15 17:15:26] [INFO] [prv:72e85c08] Joined with connection pxy:5b03f2e9
+[09/03/15 17:15:26] [DEBG] [prv:72e85c08] Copied 227 bytes to pxy:5b03f2e9
+[09/03/15 17:15:26] [DEBG] [prv:72e85c08] Closing
+[09/03/15 17:15:26] [DEBG] [pxy:5b03f2e9] Closing
+[09/03/15 17:15:26] [WARN] [pxy:5b03f2e9] Copied 459 bytes to prv:72e85c08 before failing with error read tcp 173.236.137.204:4443: use of closed network connection
+[09/03/15 17:15:27] [DEBG] [pxy:15758e1d] New connection to: 173.236.137.204:4443
+[09/03/15 17:15:27] [DEBG] [pxy:15758e1d] Writing message: {"Type":"RegProxy","Payload":{"ClientId":"b1432da024a98d1b2c3894eabb843497"}}
+[09/03/15 17:15:27] [DEBG] [pxy:15758e1d] Waiting to read message
+[09/03/15 17:15:31] [DEBG] [ctl:4696f3b5] Writing message: {"Type":"Ping","Payload":{}}
+[09/03/15 17:15:31] [DEBG] [ctl:4696f3b5] Reading message with length: 28
+[09/03/15 17:15:31] [DEBG] [ctl:4696f3b5] Read message {"Type":"Pong","Payload":{}}
+[09/03/15 17:15:31] [DEBG] [ctl:4696f3b5] Waiting to read message
+[09/03/15 17:15:51] [DEBG] [ctl:4696f3b5] Writing message: {"Type":"Ping","Payload":{}}
+[09/03/15 17:15:51] [DEBG] [ctl:4696f3b5] Reading message with length: 28
+[09/03/15 17:15:51] [DEBG] [ctl:4696f3b5] Read message {"Type":"Pong","Payload":{}}
+[09/03/15 17:15:51] [DEBG] [ctl:4696f3b5] Waiting to read message
+[09/03/15 17:16:11] [DEBG] [ctl:4696f3b5] Writing message: {"Type":"Ping","Payload":{}}
+[09/03/15 17:16:11] [DEBG] [ctl:4696f3b5] Reading message with length: 28
+[09/03/15 17:16:11] [DEBG] [ctl:4696f3b5] Read message {"Type":"Pong","Payload":{}}
+[09/03/15 17:16:11] [DEBG] [ctl:4696f3b5] Waiting to read message
+[09/03/15 17:16:13] [EROR] Error while checking for update: invalid character '<' looking for beginning of value
+[09/03/15 17:16:18] [DEBG] [ctl:4696f3b5] Reading message with length: 32
+[09/03/15 17:16:18] [DEBG] [ctl:4696f3b5] Read message {"Type":"ReqProxy","Payload":{}}
+[09/03/15 17:16:18] [DEBG] [ctl:4696f3b5] Waiting to read message
+[09/03/15 17:16:18] [DEBG] [pxy:15758e1d] Reading message with length: 127
+[09/03/15 17:16:18] [DEBG] [pxy:15758e1d] Read message {"Type":"StartProxy","Payload":{"Url":"http://czhc8dc2g8jgkt9cegnnh.tunnel.psiturk.org:8000","ClientAddr":"71.173.5.232:4544"}}
+[09/03/15 17:16:18] [DEBG] [prv:71c2e993] New connection to: 127.0.0.1:5001
+[09/03/15 17:16:18] [INFO] [prv:71c2e993] Joined with connection pxy:15758e1d
+[09/03/15 17:16:18] [DEBG] [pxy:5310a189] New connection to: 173.236.137.204:4443
+[09/03/15 17:16:18] [DEBG] [pxy:5310a189] Writing message: {"Type":"RegProxy","Payload":{"ClientId":"b1432da024a98d1b2c3894eabb843497"}}
+[09/03/15 17:16:18] [DEBG] [pxy:5310a189] Waiting to read message
+[09/03/15 17:16:19] [DEBG] [prv:71c2e993] Copied 4692 bytes to pxy:15758e1d
+[09/03/15 17:16:19] [DEBG] [prv:71c2e993] Closing
+[09/03/15 17:16:19] [DEBG] [pxy:15758e1d] Closing
+[09/03/15 17:16:19] [WARN] [pxy:15758e1d] Copied 482 bytes to prv:71c2e993 before failing with error read tcp 173.236.137.204:4443: use of closed network connection
+[09/03/15 17:16:20] [DEBG] [pxy:5310a189] Reading message with length: 127
+[09/03/15 17:16:20] [DEBG] [pxy:5310a189] Read message {"Type":"StartProxy","Payload":{"Url":"http://czhc8dc2g8jgkt9cegnnh.tunnel.psiturk.org:8000","ClientAddr":"71.173.5.232:4546"}}
+[09/03/15 17:16:20] [DEBG] [ctl:4696f3b5] Reading message with length: 32
+[09/03/15 17:16:20] [DEBG] [ctl:4696f3b5] Read message {"Type":"ReqProxy","Payload":{}}
+[09/03/15 17:16:20] [DEBG] [ctl:4696f3b5] Waiting to read message
+[09/03/15 17:16:20] [DEBG] [prv:13f592f8] New connection to: 127.0.0.1:5001
+[09/03/15 17:16:20] [INFO] [prv:13f592f8] Joined with connection pxy:5310a189
+[09/03/15 17:16:20] [DEBG] [prv:13f592f8] Copied 228 bytes to pxy:5310a189
+[09/03/15 17:16:20] [DEBG] [prv:13f592f8] Closing
+[09/03/15 17:16:20] [DEBG] [pxy:5310a189] Closing
+[09/03/15 17:16:20] [WARN] [pxy:5310a189] Copied 633 bytes to prv:13f592f8 before failing with error read tcp 173.236.137.204:4443: use of closed network connection
+[09/03/15 17:16:20] [DEBG] [ctl:4696f3b5] Reading message with length: 32
+[09/03/15 17:16:20] [DEBG] [ctl:4696f3b5] Read message {"Type":"ReqProxy","Payload":{}}
+[09/03/15 17:16:20] [DEBG] [ctl:4696f3b5] Waiting to read message
+[09/03/15 17:16:20] [DEBG] [pxy:3d45d747] New connection to: 173.236.137.204:4443
+[09/03/15 17:16:20] [DEBG] [pxy:3d45d747] Writing message: {"Type":"RegProxy","Payload":{"ClientId":"b1432da024a98d1b2c3894eabb843497"}}
+[09/03/15 17:16:20] [DEBG] [pxy:38b78f19] New connection to: 173.236.137.204:4443
+[09/03/15 17:16:20] [DEBG] [pxy:38b78f19] Writing message: {"Type":"RegProxy","Payload":{"ClientId":"b1432da024a98d1b2c3894eabb843497"}}
+[09/03/15 17:16:20] [DEBG] [pxy:3d45d747] Waiting to read message
+[09/03/15 17:16:20] [DEBG] [pxy:38b78f19] Waiting to read message
+[09/03/15 17:16:20] [DEBG] [ctl:4696f3b5] Reading message with length: 32
+[09/03/15 17:16:20] [DEBG] [ctl:4696f3b5] Read message {"Type":"ReqProxy","Payload":{}}
+[09/03/15 17:16:20] [DEBG] [ctl:4696f3b5] Waiting to read message
+[09/03/15 17:16:20] [DEBG] [pxy:3d45d747] Reading message with length: 127
+[09/03/15 17:16:20] [DEBG] [pxy:3d45d747] Read message {"Type":"StartProxy","Payload":{"Url":"http://czhc8dc2g8jgkt9cegnnh.tunnel.psiturk.org:8000","ClientAddr":"71.173.5.232:4547"}}
+[09/03/15 17:16:20] [DEBG] [prv:5186c26] New connection to: 127.0.0.1:5001
+[09/03/15 17:16:20] [INFO] [prv:5186c26] Joined with connection pxy:3d45d747
+[09/03/15 17:16:20] [DEBG] [prv:5186c26] Copied 227 bytes to pxy:3d45d747
+[09/03/15 17:16:20] [DEBG] [prv:5186c26] Closing
+[09/03/15 17:16:20] [DEBG] [pxy:3d45d747] Closing
+[09/03/15 17:16:20] [WARN] [pxy:3d45d747] Copied 624 bytes to prv:5186c26 before failing with error read tcp 173.236.137.204:4443: use of closed network connection
+[09/03/15 17:16:20] [DEBG] [pxy:7289df47] New connection to: 173.236.137.204:4443
+[09/03/15 17:16:20] [DEBG] [pxy:7289df47] Writing message: {"Type":"RegProxy","Payload":{"ClientId":"b1432da024a98d1b2c3894eabb843497"}}
+[09/03/15 17:16:20] [DEBG] [pxy:7289df47] Waiting to read message
+[09/03/15 17:16:24] [DEBG] [ctl:4696f3b5] Reading message with length: 32
+[09/03/15 17:16:24] [DEBG] [ctl:4696f3b5] Read message {"Type":"ReqProxy","Payload":{}}
+[09/03/15 17:16:24] [DEBG] [ctl:4696f3b5] Waiting to read message
+[09/03/15 17:16:24] [DEBG] [pxy:38b78f19] Reading message with length: 127
+[09/03/15 17:16:24] [DEBG] [pxy:38b78f19] Read message {"Type":"StartProxy","Payload":{"Url":"http://czhc8dc2g8jgkt9cegnnh.tunnel.psiturk.org:8000","ClientAddr":"71.173.5.232:4550"}}
+[09/03/15 17:16:24] [DEBG] [prv:3b1af436] New connection to: 127.0.0.1:5001
+[09/03/15 17:16:24] [INFO] [prv:3b1af436] Joined with connection pxy:38b78f19
+[09/03/15 17:16:24] [DEBG] [pxy:4c3a6527] New connection to: 173.236.137.204:4443
+[09/03/15 17:16:24] [DEBG] [pxy:4c3a6527] Writing message: {"Type":"RegProxy","Payload":{"ClientId":"b1432da024a98d1b2c3894eabb843497"}}
+[09/03/15 17:16:24] [DEBG] [pxy:4c3a6527] Waiting to read message
+[09/03/15 17:16:26] [DEBG] [pxy:38b78f19] Copied 664 bytes to prv:3b1af436
+[09/03/15 17:16:26] [DEBG] [pxy:38b78f19] Closing
+[09/03/15 17:16:26] [DEBG] [prv:3b1af436] Closing
+[09/03/15 17:16:26] [WARN] [prv:3b1af436] Copied 2626 bytes to pxy:38b78f19 before failing with error read tcp 127.0.0.1:5001: use of closed network connection
+[09/03/15 17:16:26] [DEBG] [ctl:4696f3b5] Reading message with length: 32
+[09/03/15 17:16:26] [DEBG] [ctl:4696f3b5] Read message {"Type":"ReqProxy","Payload":{}}
+[09/03/15 17:16:26] [DEBG] [ctl:4696f3b5] Waiting to read message
+[09/03/15 17:16:26] [DEBG] [pxy:7289df47] Reading message with length: 127
+[09/03/15 17:16:26] [DEBG] [pxy:7289df47] Read message {"Type":"StartProxy","Payload":{"Url":"http://czhc8dc2g8jgkt9cegnnh.tunnel.psiturk.org:8000","ClientAddr":"71.173.5.232:4553"}}
+[09/03/15 17:16:26] [DEBG] [prv:3376343] New connection to: 127.0.0.1:5001
+[09/03/15 17:16:26] [INFO] [prv:3376343] Joined with connection pxy:7289df47
+[09/03/15 17:16:26] [DEBG] [prv:3376343] Copied 228 bytes to pxy:7289df47
+[09/03/15 17:16:26] [DEBG] [prv:3376343] Closing
+[09/03/15 17:16:26] [DEBG] [pxy:7289df47] Closing
+[09/03/15 17:16:26] [WARN] [pxy:7289df47] Copied 629 bytes to prv:3376343 before failing with error read tcp 173.236.137.204:4443: use of closed network connection
+[09/03/15 17:16:26] [DEBG] [ctl:4696f3b5] Reading message with length: 32
+[09/03/15 17:16:26] [DEBG] [ctl:4696f3b5] Read message {"Type":"ReqProxy","Payload":{}}
+[09/03/15 17:16:26] [DEBG] [ctl:4696f3b5] Waiting to read message
+[09/03/15 17:16:26] [DEBG] [pxy:4c3a6527] Reading message with length: 127
+[09/03/15 17:16:26] [DEBG] [pxy:4c3a6527] Read message {"Type":"StartProxy","Payload":{"Url":"http://czhc8dc2g8jgkt9cegnnh.tunnel.psiturk.org:8000","ClientAddr":"71.173.5.232:4556"}}
+[09/03/15 17:16:26] [DEBG] [prv:266a5f7] New connection to: 127.0.0.1:5001
+[09/03/15 17:16:26] [INFO] [prv:266a5f7] Joined with connection pxy:4c3a6527
+[09/03/15 17:16:26] [DEBG] [prv:266a5f7] Copied 227 bytes to pxy:4c3a6527
+[09/03/15 17:16:26] [DEBG] [prv:266a5f7] Closing
+[09/03/15 17:16:26] [DEBG] [pxy:4c3a6527] Closing
+[09/03/15 17:16:26] [WARN] [pxy:4c3a6527] Copied 609 bytes to prv:266a5f7 before failing with error read tcp 173.236.137.204:4443: use of closed network connection
+[09/03/15 17:16:26] [DEBG] [ctl:4696f3b5] Reading message with length: 32
+[09/03/15 17:16:26] [DEBG] [ctl:4696f3b5] Read message {"Type":"ReqProxy","Payload":{}}
+[09/03/15 17:16:26] [DEBG] [ctl:4696f3b5] Waiting to read message
+[09/03/15 17:16:26] [DEBG] [ctl:4696f3b5] Reading message with length: 32
+[09/03/15 17:16:26] [DEBG] [ctl:4696f3b5] Read message {"Type":"ReqProxy","Payload":{}}
+[09/03/15 17:16:26] [DEBG] [ctl:4696f3b5] Waiting to read message
+[09/03/15 17:16:26] [DEBG] [ctl:4696f3b5] Reading message with length: 32
+[09/03/15 17:16:26] [DEBG] [ctl:4696f3b5] Read message {"Type":"ReqProxy","Payload":{}}
+[09/03/15 17:16:26] [DEBG] [ctl:4696f3b5] Waiting to read message
+[09/03/15 17:16:26] [DEBG] [ctl:4696f3b5] Reading message with length: 32
+[09/03/15 17:16:26] [DEBG] [ctl:4696f3b5] Read message {"Type":"ReqProxy","Payload":{}}
+[09/03/15 17:16:26] [DEBG] [ctl:4696f3b5] Waiting to read message
+[09/03/15 17:16:26] [DEBG] [pxy:26cd82d1] New connection to: 173.236.137.204:4443
+[09/03/15 17:16:26] [DEBG] [pxy:26cd82d1] Writing message: {"Type":"RegProxy","Payload":{"ClientId":"b1432da024a98d1b2c3894eabb843497"}}
+[09/03/15 17:16:26] [DEBG] [pxy:60844425] New connection to: 173.236.137.204:4443
+[09/03/15 17:16:26] [DEBG] [pxy:60844425] Writing message: {"Type":"RegProxy","Payload":{"ClientId":"b1432da024a98d1b2c3894eabb843497"}}
+[09/03/15 17:16:26] [DEBG] [pxy:5695d870] New connection to: 173.236.137.204:4443
+[09/03/15 17:16:26] [DEBG] [pxy:5695d870] Writing message: {"Type":"RegProxy","Payload":{"ClientId":"b1432da024a98d1b2c3894eabb843497"}}
+[09/03/15 17:16:26] [DEBG] [pxy:28fa5f27] New connection to: 173.236.137.204:4443
+[09/03/15 17:16:26] [DEBG] [pxy:28fa5f27] Writing message: {"Type":"RegProxy","Payload":{"ClientId":"b1432da024a98d1b2c3894eabb843497"}}
+[09/03/15 17:16:26] [DEBG] [pxy:68732c97] New connection to: 173.236.137.204:4443
+[09/03/15 17:16:26] [DEBG] [pxy:68732c97] Writing message: {"Type":"RegProxy","Payload":{"ClientId":"b1432da024a98d1b2c3894eabb843497"}}
+[09/03/15 17:16:26] [DEBG] [pxy:63e6ec75] New connection to: 173.236.137.204:4443
+[09/03/15 17:16:26] [DEBG] [pxy:63e6ec75] Writing message: {"Type":"RegProxy","Payload":{"ClientId":"b1432da024a98d1b2c3894eabb843497"}}
+[09/03/15 17:16:26] [DEBG] [ctl:4696f3b5] Reading message with length: 32
+[09/03/15 17:16:26] [DEBG] [ctl:4696f3b5] Read message {"Type":"ReqProxy","Payload":{}}
+[09/03/15 17:16:26] [DEBG] [ctl:4696f3b5] Waiting to read message
+[09/03/15 17:16:26] [DEBG] [ctl:4696f3b5] Reading message with length: 32
+[09/03/15 17:16:26] [DEBG] [ctl:4696f3b5] Read message {"Type":"ReqProxy","Payload":{}}
+[09/03/15 17:16:26] [DEBG] [ctl:4696f3b5] Waiting to read message
+[09/03/15 17:16:26] [DEBG] [pxy:26cd82d1] Waiting to read message
+[09/03/15 17:16:26] [DEBG] [pxy:7c2f6b4f] New connection to: 173.236.137.204:4443
+[09/03/15 17:16:26] [DEBG] [pxy:7c2f6b4f] Writing message: {"Type":"RegProxy","Payload":{"ClientId":"b1432da024a98d1b2c3894eabb843497"}}
+[09/03/15 17:16:26] [DEBG] [pxy:5695d870] Waiting to read message
+[09/03/15 17:16:26] [DEBG] [pxy:7f3ce61d] New connection to: 173.236.137.204:4443
+[09/03/15 17:16:26] [DEBG] [pxy:7f3ce61d] Writing message: {"Type":"RegProxy","Payload":{"ClientId":"b1432da024a98d1b2c3894eabb843497"}}
+[09/03/15 17:16:26] [DEBG] [pxy:60844425] Waiting to read message
+[09/03/15 17:16:26] [DEBG] [pxy:28fa5f27] Waiting to read message
+[09/03/15 17:16:27] [DEBG] [pxy:68732c97] Waiting to read message
+[09/03/15 17:16:27] [DEBG] [ctl:4696f3b5] Reading message with length: 32
+[09/03/15 17:16:27] [DEBG] [ctl:4696f3b5] Read message {"Type":"ReqProxy","Payload":{}}
+[09/03/15 17:16:27] [DEBG] [ctl:4696f3b5] Waiting to read message
+[09/03/15 17:16:27] [DEBG] [pxy:26cd82d1] Reading message with length: 127
+[09/03/15 17:16:27] [DEBG] [pxy:26cd82d1] Read message {"Type":"StartProxy","Payload":{"Url":"http://czhc8dc2g8jgkt9cegnnh.tunnel.psiturk.org:8000","ClientAddr":"71.173.5.232:4555"}}
+[09/03/15 17:16:27] [DEBG] [prv:27b347f] New connection to: 127.0.0.1:5001
+[09/03/15 17:16:27] [INFO] [prv:27b347f] Joined with connection pxy:26cd82d1
+[09/03/15 17:16:27] [DEBG] [prv:27b347f] Copied 228 bytes to pxy:26cd82d1
+[09/03/15 17:16:27] [DEBG] [prv:27b347f] Closing
+[09/03/15 17:16:27] [DEBG] [pxy:26cd82d1] Closing
+[09/03/15 17:16:27] [WARN] [pxy:26cd82d1] Copied 614 bytes to prv:27b347f before failing with error read tcp 173.236.137.204:4443: use of closed network connection
+[09/03/15 17:16:27] [DEBG] [pxy:63e6ec75] Waiting to read message
+[09/03/15 17:16:27] [DEBG] [ctl:4696f3b5] Reading message with length: 32
+[09/03/15 17:16:27] [DEBG] [ctl:4696f3b5] Read message {"Type":"ReqProxy","Payload":{}}
+[09/03/15 17:16:27] [DEBG] [ctl:4696f3b5] Waiting to read message
+[09/03/15 17:16:27] [DEBG] [ctl:4696f3b5] Reading message with length: 32
+[09/03/15 17:16:27] [DEBG] [ctl:4696f3b5] Read message {"Type":"ReqProxy","Payload":{}}
+[09/03/15 17:16:27] [DEBG] [ctl:4696f3b5] Waiting to read message
+[09/03/15 17:16:27] [DEBG] [pxy:5695d870] Reading message with length: 127
+[09/03/15 17:16:27] [DEBG] [pxy:5695d870] Read message {"Type":"StartProxy","Payload":{"Url":"http://czhc8dc2g8jgkt9cegnnh.tunnel.psiturk.org:8000","ClientAddr":"71.173.5.232:4554"}}
+[09/03/15 17:16:27] [DEBG] [prv:385a16a8] New connection to: 127.0.0.1:5001
+[09/03/15 17:16:27] [INFO] [prv:385a16a8] Joined with connection pxy:5695d870
+[09/03/15 17:16:27] [DEBG] [pxy:60844425] Reading message with length: 127
+[09/03/15 17:16:27] [DEBG] [pxy:60844425] Read message {"Type":"StartProxy","Payload":{"Url":"http://czhc8dc2g8jgkt9cegnnh.tunnel.psiturk.org:8000","ClientAddr":"71.173.5.232:4557"}}
+[09/03/15 17:16:27] [DEBG] [prv:4b987f0b] New connection to: 127.0.0.1:5001
+[09/03/15 17:16:27] [INFO] [prv:4b987f0b] Joined with connection pxy:60844425
+[09/03/15 17:16:27] [DEBG] [ctl:4696f3b5] Reading message with length: 32
+[09/03/15 17:16:27] [DEBG] [ctl:4696f3b5] Read message {"Type":"ReqProxy","Payload":{}}
+[09/03/15 17:16:27] [DEBG] [ctl:4696f3b5] Waiting to read message
+[09/03/15 17:16:27] [DEBG] [pxy:28fa5f27] Reading message with length: 127
+[09/03/15 17:16:27] [DEBG] [pxy:28fa5f27] Read message {"Type":"StartProxy","Payload":{"Url":"http://czhc8dc2g8jgkt9cegnnh.tunnel.psiturk.org:8000","ClientAddr":"71.173.5.232:4558"}}
+[09/03/15 17:16:27] [DEBG] [prv:6566829d] New connection to: 127.0.0.1:5001
+[09/03/15 17:16:27] [INFO] [prv:6566829d] Joined with connection pxy:28fa5f27
+[09/03/15 17:16:27] [DEBG] [ctl:4696f3b5] Reading message with length: 32
+[09/03/15 17:16:27] [DEBG] [ctl:4696f3b5] Read message {"Type":"ReqProxy","Payload":{}}
+[09/03/15 17:16:27] [DEBG] [ctl:4696f3b5] Waiting to read message
+[09/03/15 17:16:27] [DEBG] [pxy:68732c97] Reading message with length: 127
+[09/03/15 17:16:27] [DEBG] [pxy:68732c97] Read message {"Type":"StartProxy","Payload":{"Url":"http://czhc8dc2g8jgkt9cegnnh.tunnel.psiturk.org:8000","ClientAddr":"71.173.5.232:4559"}}
+[09/03/15 17:16:27] [DEBG] [prv:2646478] New connection to: 127.0.0.1:5001
+[09/03/15 17:16:27] [INFO] [prv:2646478] Joined with connection pxy:68732c97
+[09/03/15 17:16:27] [DEBG] [pxy:343b4bbd] New connection to: 173.236.137.204:4443
+[09/03/15 17:16:27] [DEBG] [pxy:343b4bbd] Writing message: {"Type":"RegProxy","Payload":{"ClientId":"b1432da024a98d1b2c3894eabb843497"}}
+[09/03/15 17:16:27] [DEBG] [ctl:4696f3b5] Reading message with length: 32
+[09/03/15 17:16:27] [DEBG] [ctl:4696f3b5] Read message {"Type":"ReqProxy","Payload":{}}
+[09/03/15 17:16:27] [DEBG] [ctl:4696f3b5] Waiting to read message
+[09/03/15 17:16:27] [DEBG] [pxy:63e6ec75] Reading message with length: 127
+[09/03/15 17:16:27] [DEBG] [pxy:63e6ec75] Read message {"Type":"StartProxy","Payload":{"Url":"http://czhc8dc2g8jgkt9cegnnh.tunnel.psiturk.org:8000","ClientAddr":"71.173.5.232:4560"}}
+[09/03/15 17:16:27] [DEBG] [prv:77397552] New connection to: 127.0.0.1:5001
+[09/03/15 17:16:27] [INFO] [prv:77397552] Joined with connection pxy:63e6ec75
+[09/03/15 17:16:27] [DEBG] [pxy:fbd98c9] New connection to: 173.236.137.204:4443
+[09/03/15 17:16:27] [DEBG] [pxy:fbd98c9] Writing message: {"Type":"RegProxy","Payload":{"ClientId":"b1432da024a98d1b2c3894eabb843497"}}
+[09/03/15 17:16:27] [DEBG] [pxy:26db244] New connection to: 173.236.137.204:4443
+[09/03/15 17:16:27] [DEBG] [pxy:26db244] Writing message: {"Type":"RegProxy","Payload":{"ClientId":"b1432da024a98d1b2c3894eabb843497"}}
+[09/03/15 17:16:27] [DEBG] [pxy:7c2f6b4f] Waiting to read message
+[09/03/15 17:16:27] [DEBG] [pxy:7f3ce61d] Waiting to read message
+[09/03/15 17:16:27] [DEBG] [pxy:204d3676] New connection to: 173.236.137.204:4443
+[09/03/15 17:16:27] [DEBG] [pxy:204d3676] Writing message: {"Type":"RegProxy","Payload":{"ClientId":"b1432da024a98d1b2c3894eabb843497"}}
+[09/03/15 17:16:27] [DEBG] [pxy:508a4c8e] New connection to: 173.236.137.204:4443
+[09/03/15 17:16:27] [DEBG] [pxy:508a4c8e] Writing message: {"Type":"RegProxy","Payload":{"ClientId":"b1432da024a98d1b2c3894eabb843497"}}
+[09/03/15 17:16:27] [DEBG] [pxy:5be6e9cc] New connection to: 173.236.137.204:4443
+[09/03/15 17:16:27] [DEBG] [pxy:5be6e9cc] Writing message: {"Type":"RegProxy","Payload":{"ClientId":"b1432da024a98d1b2c3894eabb843497"}}
+[09/03/15 17:16:27] [DEBG] [ctl:4696f3b5] Reading message with length: 32
+[09/03/15 17:16:27] [DEBG] [ctl:4696f3b5] Read message {"Type":"ReqProxy","Payload":{}}
+[09/03/15 17:16:27] [DEBG] [ctl:4696f3b5] Waiting to read message
+[09/03/15 17:16:27] [DEBG] [prv:4b987f0b] Copied 227 bytes to pxy:60844425
+[09/03/15 17:16:27] [DEBG] [prv:4b987f0b] Closing
+[09/03/15 17:16:27] [DEBG] [prv:6566829d] Copied 228 bytes to pxy:28fa5f27
+[09/03/15 17:16:27] [DEBG] [prv:6566829d] Closing
+[09/03/15 17:16:27] [DEBG] [pxy:28fa5f27] Closing
+[09/03/15 17:16:27] [DEBG] [pxy:60844425] Closing
+[09/03/15 17:16:27] [WARN] [pxy:28fa5f27] Copied 608 bytes to prv:6566829d before failing with error read tcp 173.236.137.204:4443: use of closed network connection
+[09/03/15 17:16:27] [WARN] [pxy:60844425] Copied 608 bytes to prv:4b987f0b before failing with error read tcp 173.236.137.204:4443: use of closed network connection
+[09/03/15 17:16:27] [DEBG] [prv:385a16a8] Copied 228 bytes to pxy:5695d870
+[09/03/15 17:16:27] [DEBG] [prv:385a16a8] Closing
+[09/03/15 17:16:27] [DEBG] [pxy:5695d870] Closing
+[09/03/15 17:16:27] [WARN] [pxy:5695d870] Copied 612 bytes to prv:385a16a8 before failing with error read tcp 173.236.137.204:4443: use of closed network connection
+[09/03/15 17:16:27] [DEBG] [ctl:4696f3b5] Reading message with length: 32
+[09/03/15 17:16:27] [DEBG] [ctl:4696f3b5] Read message {"Type":"ReqProxy","Payload":{}}
+[09/03/15 17:16:27] [DEBG] [ctl:4696f3b5] Waiting to read message
+[09/03/15 17:16:27] [DEBG] [pxy:7c2f6b4f] Reading message with length: 127
+[09/03/15 17:16:27] [DEBG] [pxy:7c2f6b4f] Read message {"Type":"StartProxy","Payload":{"Url":"http://czhc8dc2g8jgkt9cegnnh.tunnel.psiturk.org:8000","ClientAddr":"71.173.5.232:4561"}}
+[09/03/15 17:16:27] [DEBG] [prv:736ee80b] New connection to: 127.0.0.1:5001
+[09/03/15 17:16:27] [INFO] [prv:736ee80b] Joined with connection pxy:7c2f6b4f
+[09/03/15 17:16:27] [DEBG] [pxy:7af5a377] New connection to: 173.236.137.204:4443
+[09/03/15 17:16:27] [DEBG] [pxy:7af5a377] Writing message: {"Type":"RegProxy","Payload":{"ClientId":"b1432da024a98d1b2c3894eabb843497"}}
+[09/03/15 17:16:27] [DEBG] [pxy:343b4bbd] Waiting to read message
+[09/03/15 17:16:27] [DEBG] [pxy:2af737e8] New connection to: 173.236.137.204:4443
+[09/03/15 17:16:27] [DEBG] [pxy:2af737e8] Writing message: {"Type":"RegProxy","Payload":{"ClientId":"b1432da024a98d1b2c3894eabb843497"}}
+[09/03/15 17:16:27] [DEBG] [pxy:fbd98c9] Waiting to read message
+[09/03/15 17:16:27] [DEBG] [pxy:204d3676] Waiting to read message
+[09/03/15 17:16:27] [DEBG] [pxy:26db244] Waiting to read message
+[09/03/15 17:16:27] [DEBG] [ctl:4696f3b5] Reading message with length: 32
+[09/03/15 17:16:27] [DEBG] [ctl:4696f3b5] Read message {"Type":"ReqProxy","Payload":{}}
+[09/03/15 17:16:27] [DEBG] [ctl:4696f3b5] Waiting to read message
+[09/03/15 17:16:27] [DEBG] [pxy:7f3ce61d] Reading message with length: 127
+[09/03/15 17:16:27] [DEBG] [pxy:7f3ce61d] Read message {"Type":"StartProxy","Payload":{"Url":"http://czhc8dc2g8jgkt9cegnnh.tunnel.psiturk.org:8000","ClientAddr":"71.173.5.232:4562"}}
+[09/03/15 17:16:27] [DEBG] [prv:369c4fbe] New connection to: 127.0.0.1:5001
+[09/03/15 17:16:27] [INFO] [prv:369c4fbe] Joined with connection pxy:7f3ce61d
+[09/03/15 17:16:27] [DEBG] [pxy:68732c97] Copied 606 bytes to prv:2646478
+[09/03/15 17:16:27] [DEBG] [pxy:68732c97] Closing
+[09/03/15 17:16:27] [DEBG] [prv:2646478] Closing
+[09/03/15 17:16:27] [WARN] [prv:2646478] Copied 228 bytes to pxy:68732c97 before failing with error read tcp 127.0.0.1:5001: use of closed network connection
+[09/03/15 17:16:27] [DEBG] [ctl:4696f3b5] Reading message with length: 32
+[09/03/15 17:16:27] [DEBG] [ctl:4696f3b5] Read message {"Type":"ReqProxy","Payload":{}}
+[09/03/15 17:16:27] [DEBG] [ctl:4696f3b5] Waiting to read message
+[09/03/15 17:16:27] [DEBG] [ctl:4696f3b5] Reading message with length: 32
+[09/03/15 17:16:27] [DEBG] [ctl:4696f3b5] Read message {"Type":"ReqProxy","Payload":{}}
+[09/03/15 17:16:27] [DEBG] [ctl:4696f3b5] Waiting to read message
+[09/03/15 17:16:27] [DEBG] [pxy:63e6ec75] Copied 607 bytes to prv:77397552
+[09/03/15 17:16:27] [DEBG] [pxy:63e6ec75] Closing
+[09/03/15 17:16:27] [DEBG] [prv:77397552] Closing
+[09/03/15 17:16:27] [WARN] [prv:77397552] Copied 228 bytes to pxy:63e6ec75 before failing with error read tcp 127.0.0.1:5001: use of closed network connection
+[09/03/15 17:16:27] [DEBG] [pxy:343b4bbd] Reading message with length: 127
+[09/03/15 17:16:27] [DEBG] [pxy:343b4bbd] Read message {"Type":"StartProxy","Payload":{"Url":"http://czhc8dc2g8jgkt9cegnnh.tunnel.psiturk.org:8000","ClientAddr":"71.173.5.232:4563"}}
+[09/03/15 17:16:27] [DEBG] [prv:33dae748] New connection to: 127.0.0.1:5001
+[09/03/15 17:16:27] [INFO] [prv:33dae748] Joined with connection pxy:343b4bbd
+[09/03/15 17:16:27] [DEBG] [pxy:508a4c8e] Waiting to read message
+[09/03/15 17:16:27] [DEBG] [prv:736ee80b] Copied 227 bytes to pxy:7c2f6b4f
+[09/03/15 17:16:27] [DEBG] [prv:736ee80b] Closing
+[09/03/15 17:16:27] [DEBG] [pxy:7c2f6b4f] Closing
+[09/03/15 17:16:27] [WARN] [pxy:7c2f6b4f] Copied 603 bytes to prv:736ee80b before failing with error read tcp 173.236.137.204:4443: use of closed network connection
+[09/03/15 17:16:27] [DEBG] [prv:33dae748] Copied 228 bytes to pxy:343b4bbd
+[09/03/15 17:16:27] [DEBG] [prv:33dae748] Closing
+[09/03/15 17:16:27] [DEBG] [pxy:343b4bbd] Closing
+[09/03/15 17:16:27] [WARN] [pxy:343b4bbd] Copied 603 bytes to prv:33dae748 before failing with error read tcp 173.236.137.204:4443: use of closed network connection
+[09/03/15 17:16:27] [DEBG] [pxy:5be6e9cc] Waiting to read message
+[09/03/15 17:16:27] [DEBG] [prv:369c4fbe] Copied 9992 bytes to pxy:7f3ce61d
+[09/03/15 17:16:27] [DEBG] [prv:369c4fbe] Closing
+[09/03/15 17:16:27] [DEBG] [pxy:7f3ce61d] Closing
+[09/03/15 17:16:27] [WARN] [pxy:7f3ce61d] Copied 502 bytes to prv:369c4fbe before failing with error read tcp 173.236.137.204:4443: use of closed network connection
+[09/03/15 17:16:27] [DEBG] [ctl:4696f3b5] Reading message with length: 32
+[09/03/15 17:16:27] [DEBG] [ctl:4696f3b5] Read message {"Type":"ReqProxy","Payload":{}}
+[09/03/15 17:16:27] [DEBG] [ctl:4696f3b5] Waiting to read message
+[09/03/15 17:16:27] [DEBG] [pxy:fbd98c9] Reading message with length: 127
+[09/03/15 17:16:27] [DEBG] [pxy:fbd98c9] Read message {"Type":"StartProxy","Payload":{"Url":"http://czhc8dc2g8jgkt9cegnnh.tunnel.psiturk.org:8000","ClientAddr":"71.173.5.232:4564"}}
+[09/03/15 17:16:27] [DEBG] [prv:69c571c6] New connection to: 127.0.0.1:5001
+[09/03/15 17:16:27] [INFO] [prv:69c571c6] Joined with connection pxy:fbd98c9
+[09/03/15 17:16:27] [DEBG] [prv:69c571c6] Copied 227 bytes to pxy:fbd98c9
+[09/03/15 17:16:27] [DEBG] [prv:69c571c6] Closing
+[09/03/15 17:16:27] [DEBG] [pxy:fbd98c9] Closing
+[09/03/15 17:16:27] [WARN] [pxy:fbd98c9] Copied 620 bytes to prv:69c571c6 before failing with error read tcp 173.236.137.204:4443: use of closed network connection
+[09/03/15 17:16:27] [DEBG] [pxy:1ac16234] New connection to: 173.236.137.204:4443
+[09/03/15 17:16:27] [DEBG] [pxy:1ac16234] Writing message: {"Type":"RegProxy","Payload":{"ClientId":"b1432da024a98d1b2c3894eabb843497"}}
+[09/03/15 17:16:27] [DEBG] [pxy:13ecee73] New connection to: 173.236.137.204:4443
+[09/03/15 17:16:27] [DEBG] [pxy:13ecee73] Writing message: {"Type":"RegProxy","Payload":{"ClientId":"b1432da024a98d1b2c3894eabb843497"}}
+[09/03/15 17:16:27] [DEBG] [pxy:7a511cbc] New connection to: 173.236.137.204:4443
+[09/03/15 17:16:27] [DEBG] [pxy:7a511cbc] Writing message: {"Type":"RegProxy","Payload":{"ClientId":"b1432da024a98d1b2c3894eabb843497"}}
+[09/03/15 17:16:27] [DEBG] [pxy:7af5a377] Waiting to read message
+[09/03/15 17:16:27] [DEBG] [pxy:2af737e8] Waiting to read message
+[09/03/15 17:16:27] [DEBG] [pxy:2e4f8ff6] New connection to: 173.236.137.204:4443
+[09/03/15 17:16:27] [DEBG] [pxy:2e4f8ff6] Writing message: {"Type":"RegProxy","Payload":{"ClientId":"b1432da024a98d1b2c3894eabb843497"}}
+[09/03/15 17:16:27] [DEBG] [pxy:1ac16234] Waiting to read message
+[09/03/15 17:16:27] [DEBG] [pxy:7a511cbc] Waiting to read message
+[09/03/15 17:16:27] [DEBG] [pxy:13ecee73] Waiting to read message
+[09/03/15 17:16:27] [DEBG] [pxy:2e4f8ff6] Waiting to read message
+[09/03/15 17:16:27] [DEBG] [ctl:4696f3b5] Reading message with length: 32
+[09/03/15 17:16:27] [DEBG] [ctl:4696f3b5] Read message {"Type":"ReqProxy","Payload":{}}
+[09/03/15 17:16:27] [DEBG] [ctl:4696f3b5] Waiting to read message
+[09/03/15 17:16:27] [DEBG] [pxy:204d3676] Reading message with length: 127
+[09/03/15 17:16:27] [DEBG] [pxy:204d3676] Read message {"Type":"StartProxy","Payload":{"Url":"http://czhc8dc2g8jgkt9cegnnh.tunnel.psiturk.org:8000","ClientAddr":"71.173.5.232:4565"}}
+[09/03/15 17:16:27] [DEBG] [prv:60f035a1] New connection to: 127.0.0.1:5001
+[09/03/15 17:16:27] [INFO] [prv:60f035a1] Joined with connection pxy:204d3676
+[09/03/15 17:16:27] [DEBG] [prv:60f035a1] Copied 325 bytes to pxy:204d3676
+[09/03/15 17:16:27] [DEBG] [prv:60f035a1] Closing
+[09/03/15 17:16:27] [DEBG] [pxy:204d3676] Closing
+[09/03/15 17:16:27] [WARN] [pxy:204d3676] Copied 611 bytes to prv:60f035a1 before failing with error read tcp 173.236.137.204:4443: use of closed network connection
+[09/03/15 17:16:27] [DEBG] [pxy:2746c865] New connection to: 173.236.137.204:4443
+[09/03/15 17:16:27] [DEBG] [pxy:2746c865] Writing message: {"Type":"RegProxy","Payload":{"ClientId":"b1432da024a98d1b2c3894eabb843497"}}
+[09/03/15 17:16:28] [DEBG] [ctl:4696f3b5] Reading message with length: 32
+[09/03/15 17:16:28] [DEBG] [ctl:4696f3b5] Read message {"Type":"ReqProxy","Payload":{}}
+[09/03/15 17:16:28] [DEBG] [ctl:4696f3b5] Waiting to read message
+[09/03/15 17:16:28] [DEBG] [pxy:26db244] Reading message with length: 127
+[09/03/15 17:16:28] [DEBG] [pxy:26db244] Read message {"Type":"StartProxy","Payload":{"Url":"http://czhc8dc2g8jgkt9cegnnh.tunnel.psiturk.org:8000","ClientAddr":"71.173.5.232:4566"}}
+[09/03/15 17:16:28] [DEBG] [prv:2a29ddd4] New connection to: 127.0.0.1:5001
+[09/03/15 17:16:28] [INFO] [prv:2a29ddd4] Joined with connection pxy:26db244
+[09/03/15 17:16:28] [DEBG] [pxy:2746c865] Waiting to read message
+[09/03/15 17:16:28] [DEBG] [pxy:767cbe44] New connection to: 173.236.137.204:4443
+[09/03/15 17:16:28] [DEBG] [pxy:767cbe44] Writing message: {"Type":"RegProxy","Payload":{"ClientId":"b1432da024a98d1b2c3894eabb843497"}}
+[09/03/15 17:16:28] [DEBG] [pxy:767cbe44] Waiting to read message
+[09/03/15 17:16:28] [DEBG] [prv:2a29ddd4] Copied 2139 bytes to pxy:26db244
+[09/03/15 17:16:28] [DEBG] [prv:2a29ddd4] Closing
+[09/03/15 17:16:28] [DEBG] [pxy:26db244] Closing
+[09/03/15 17:16:28] [WARN] [pxy:26db244] Copied 550 bytes to prv:2a29ddd4 before failing with error read tcp 173.236.137.204:4443: use of closed network connection
+[09/03/15 17:16:28] [DEBG] [ctl:4696f3b5] Reading message with length: 32
+[09/03/15 17:16:28] [DEBG] [ctl:4696f3b5] Read message {"Type":"ReqProxy","Payload":{}}
+[09/03/15 17:16:28] [DEBG] [ctl:4696f3b5] Waiting to read message
+[09/03/15 17:16:28] [DEBG] [pxy:508a4c8e] Reading message with length: 127
+[09/03/15 17:16:28] [DEBG] [pxy:508a4c8e] Read message {"Type":"StartProxy","Payload":{"Url":"http://czhc8dc2g8jgkt9cegnnh.tunnel.psiturk.org:8000","ClientAddr":"71.173.5.232:4568"}}
+[09/03/15 17:16:28] [DEBG] [prv:8ba0262] New connection to: 127.0.0.1:5001
+[09/03/15 17:16:28] [INFO] [prv:8ba0262] Joined with connection pxy:508a4c8e
+[09/03/15 17:16:28] [DEBG] [pxy:5a6ac1b3] New connection to: 173.236.137.204:4443
+[09/03/15 17:16:28] [DEBG] [pxy:5a6ac1b3] Writing message: {"Type":"RegProxy","Payload":{"ClientId":"b1432da024a98d1b2c3894eabb843497"}}
+[09/03/15 17:16:28] [DEBG] [prv:8ba0262] Copied 2504 bytes to pxy:508a4c8e
+[09/03/15 17:16:28] [DEBG] [prv:8ba0262] Closing
+[09/03/15 17:16:28] [DEBG] [pxy:508a4c8e] Closing
+[09/03/15 17:16:28] [WARN] [pxy:508a4c8e] Copied 552 bytes to prv:8ba0262 before failing with error read tcp 173.236.137.204:4443: use of closed network connection
+[09/03/15 17:16:28] [DEBG] [pxy:5a6ac1b3] Waiting to read message
+[09/03/15 17:16:28] [DEBG] [ctl:4696f3b5] Reading message with length: 32
+[09/03/15 17:16:28] [DEBG] [ctl:4696f3b5] Read message {"Type":"ReqProxy","Payload":{}}
+[09/03/15 17:16:28] [DEBG] [ctl:4696f3b5] Waiting to read message
+[09/03/15 17:16:28] [DEBG] [pxy:5be6e9cc] Reading message with length: 127
+[09/03/15 17:16:28] [DEBG] [pxy:5be6e9cc] Read message {"Type":"StartProxy","Payload":{"Url":"http://czhc8dc2g8jgkt9cegnnh.tunnel.psiturk.org:8000","ClientAddr":"71.173.5.232:4570"}}
+[09/03/15 17:16:28] [DEBG] [prv:755f3ad6] New connection to: 127.0.0.1:5001
+[09/03/15 17:16:28] [INFO] [prv:755f3ad6] Joined with connection pxy:5be6e9cc
+[09/03/15 17:16:29] [DEBG] [prv:755f3ad6] Copied 2709 bytes to pxy:5be6e9cc
+[09/03/15 17:16:29] [DEBG] [prv:755f3ad6] Closing
+[09/03/15 17:16:29] [DEBG] [pxy:5be6e9cc] Closing
+[09/03/15 17:16:29] [WARN] [pxy:5be6e9cc] Copied 549 bytes to prv:755f3ad6 before failing with error read tcp 173.236.137.204:4443: use of closed network connection
+[09/03/15 17:16:29] [DEBG] [pxy:2269defe] New connection to: 173.236.137.204:4443
+[09/03/15 17:16:29] [DEBG] [pxy:2269defe] Writing message: {"Type":"RegProxy","Payload":{"ClientId":"b1432da024a98d1b2c3894eabb843497"}}
+[09/03/15 17:16:29] [DEBG] [pxy:2269defe] Waiting to read message
+[09/03/15 17:16:29] [DEBG] [ctl:4696f3b5] Reading message with length: 32
+[09/03/15 17:16:29] [DEBG] [ctl:4696f3b5] Read message {"Type":"ReqProxy","Payload":{}}
+[09/03/15 17:16:29] [DEBG] [ctl:4696f3b5] Waiting to read message
+[09/03/15 17:16:29] [DEBG] [pxy:7af5a377] Reading message with length: 127
+[09/03/15 17:16:29] [DEBG] [pxy:7af5a377] Read message {"Type":"StartProxy","Payload":{"Url":"http://czhc8dc2g8jgkt9cegnnh.tunnel.psiturk.org:8000","ClientAddr":"71.173.5.232:4571"}}
+[09/03/15 17:16:29] [DEBG] [prv:14de6fd3] New connection to: 127.0.0.1:5001
+[09/03/15 17:16:29] [INFO] [prv:14de6fd3] Joined with connection pxy:7af5a377
+[09/03/15 17:16:29] [DEBG] [pxy:834c143] New connection to: 173.236.137.204:4443
+[09/03/15 17:16:29] [DEBG] [pxy:834c143] Writing message: {"Type":"RegProxy","Payload":{"ClientId":"b1432da024a98d1b2c3894eabb843497"}}
+[09/03/15 17:16:29] [DEBG] [prv:14de6fd3] Copied 996 bytes to pxy:7af5a377
+[09/03/15 17:16:29] [DEBG] [prv:14de6fd3] Closing
+[09/03/15 17:16:29] [DEBG] [pxy:7af5a377] Closing
+[09/03/15 17:16:29] [WARN] [pxy:7af5a377] Copied 563 bytes to prv:14de6fd3 before failing with error read tcp 173.236.137.204:4443: use of closed network connection
+[09/03/15 17:16:29] [DEBG] [pxy:834c143] Waiting to read message
+[09/03/15 17:16:29] [DEBG] [ctl:4696f3b5] Reading message with length: 32
+[09/03/15 17:16:29] [DEBG] [ctl:4696f3b5] Read message {"Type":"ReqProxy","Payload":{}}
+[09/03/15 17:16:29] [DEBG] [ctl:4696f3b5] Waiting to read message
+[09/03/15 17:16:29] [DEBG] [pxy:2af737e8] Reading message with length: 127
+[09/03/15 17:16:29] [DEBG] [pxy:2af737e8] Read message {"Type":"StartProxy","Payload":{"Url":"http://czhc8dc2g8jgkt9cegnnh.tunnel.psiturk.org:8000","ClientAddr":"71.173.5.232:4572"}}
+[09/03/15 17:16:29] [DEBG] [prv:3accbee4] New connection to: 127.0.0.1:5001
+[09/03/15 17:16:29] [INFO] [prv:3accbee4] Joined with connection pxy:2af737e8
+[09/03/15 17:16:29] [DEBG] [pxy:61133350] New connection to: 173.236.137.204:4443
+[09/03/15 17:16:29] [DEBG] [pxy:61133350] Writing message: {"Type":"RegProxy","Payload":{"ClientId":"b1432da024a98d1b2c3894eabb843497"}}
+[09/03/15 17:16:29] [DEBG] [pxy:61133350] Waiting to read message
+[09/03/15 17:16:29] [DEBG] [prv:3accbee4] Copied 1503 bytes to pxy:2af737e8
+[09/03/15 17:16:29] [DEBG] [prv:3accbee4] Closing
+[09/03/15 17:16:29] [DEBG] [pxy:2af737e8] Closing
+[09/03/15 17:16:29] [WARN] [pxy:2af737e8] Copied 563 bytes to prv:3accbee4 before failing with error read tcp 173.236.137.204:4443: use of closed network connection
+[09/03/15 17:16:31] [DEBG] [ctl:4696f3b5] Writing message: {"Type":"Ping","Payload":{}}
+[09/03/15 17:16:31] [DEBG] [ctl:4696f3b5] Reading message with length: 28
+[09/03/15 17:16:31] [DEBG] [ctl:4696f3b5] Read message {"Type":"Pong","Payload":{}}
+[09/03/15 17:16:31] [DEBG] [ctl:4696f3b5] Waiting to read message
+[09/03/15 17:16:51] [DEBG] [ctl:4696f3b5] Writing message: {"Type":"Ping","Payload":{}}
+[09/03/15 17:16:51] [DEBG] [ctl:4696f3b5] Reading message with length: 28
+[09/03/15 17:16:51] [DEBG] [ctl:4696f3b5] Read message {"Type":"Pong","Payload":{}}
+[09/03/15 17:16:51] [DEBG] [ctl:4696f3b5] Waiting to read message
+[09/03/15 17:17:11] [DEBG] [ctl:4696f3b5] Writing message: {"Type":"Ping","Payload":{}}
+[09/03/15 17:17:11] [DEBG] [ctl:4696f3b5] Reading message with length: 28
+[09/03/15 17:17:11] [DEBG] [ctl:4696f3b5] Read message {"Type":"Pong","Payload":{}}
+[09/03/15 17:17:11] [DEBG] [ctl:4696f3b5] Waiting to read message
+[09/03/15 17:17:31] [DEBG] [ctl:4696f3b5] Writing message: {"Type":"Ping","Payload":{}}
+[09/03/15 17:17:31] [DEBG] [ctl:4696f3b5] Reading message with length: 28
+[09/03/15 17:17:31] [DEBG] [ctl:4696f3b5] Read message {"Type":"Pong","Payload":{}}
+[09/03/15 17:17:31] [DEBG] [ctl:4696f3b5] Waiting to read message
+[09/03/15 17:17:51] [DEBG] [ctl:4696f3b5] Writing message: {"Type":"Ping","Payload":{}}
+[09/03/15 17:17:51] [DEBG] [ctl:4696f3b5] Reading message with length: 28
+[09/03/15 17:17:51] [DEBG] [ctl:4696f3b5] Read message {"Type":"Pong","Payload":{}}
+[09/03/15 17:17:51] [DEBG] [ctl:4696f3b5] Waiting to read message
+[09/03/15 17:18:11] [DEBG] [ctl:4696f3b5] Writing message: {"Type":"Ping","Payload":{}}
+[09/03/15 17:18:11] [DEBG] [ctl:4696f3b5] Reading message with length: 28
+[09/03/15 17:18:11] [DEBG] [ctl:4696f3b5] Read message {"Type":"Pong","Payload":{}}
+[09/03/15 17:18:11] [DEBG] [ctl:4696f3b5] Waiting to read message
+[09/03/15 17:18:31] [DEBG] [ctl:4696f3b5] Writing message: {"Type":"Ping","Payload":{}}
+[09/03/15 17:18:31] [DEBG] [ctl:4696f3b5] Reading message with length: 28
+[09/03/15 17:18:31] [DEBG] [ctl:4696f3b5] Read message {"Type":"Pong","Payload":{}}
+[09/03/15 17:18:31] [DEBG] [ctl:4696f3b5] Waiting to read message
+[09/03/15 17:18:51] [DEBG] [ctl:4696f3b5] Writing message: {"Type":"Ping","Payload":{}}
+[09/03/15 17:18:51] [DEBG] [ctl:4696f3b5] Reading message with length: 28
+[09/03/15 17:18:51] [DEBG] [ctl:4696f3b5] Read message {"Type":"Pong","Payload":{}}
+[09/03/15 17:18:51] [DEBG] [ctl:4696f3b5] Waiting to read message
+[09/03/15 17:19:11] [DEBG] [ctl:4696f3b5] Writing message: {"Type":"Ping","Payload":{}}
+[09/03/15 17:19:11] [DEBG] [ctl:4696f3b5] Reading message with length: 28
+[09/03/15 17:19:11] [DEBG] [ctl:4696f3b5] Read message {"Type":"Pong","Payload":{}}
+[09/03/15 17:19:11] [DEBG] [ctl:4696f3b5] Waiting to read message
+[09/03/15 17:19:31] [DEBG] [ctl:4696f3b5] Writing message: {"Type":"Ping","Payload":{}}
+[09/03/15 17:19:31] [DEBG] [ctl:4696f3b5] Reading message with length: 28
+[09/03/15 17:19:31] [DEBG] [ctl:4696f3b5] Read message {"Type":"Pong","Payload":{}}
+[09/03/15 17:19:31] [DEBG] [ctl:4696f3b5] Waiting to read message
+[09/03/15 17:19:51] [DEBG] [ctl:4696f3b5] Writing message: {"Type":"Ping","Payload":{}}
+[09/03/15 17:19:51] [DEBG] [ctl:4696f3b5] Reading message with length: 28
+[09/03/15 17:19:51] [DEBG] [ctl:4696f3b5] Read message {"Type":"Pong","Payload":{}}
+[09/03/15 17:19:51] [DEBG] [ctl:4696f3b5] Waiting to read message
+[09/03/15 17:20:11] [DEBG] [ctl:4696f3b5] Writing message: {"Type":"Ping","Payload":{}}
+[09/03/15 17:20:11] [DEBG] [ctl:4696f3b5] Reading message with length: 28
+[09/03/15 17:20:11] [DEBG] [ctl:4696f3b5] Read message {"Type":"Pong","Payload":{}}
+[09/03/15 17:20:11] [DEBG] [ctl:4696f3b5] Waiting to read message
+[09/03/15 17:20:31] [DEBG] [ctl:4696f3b5] Writing message: {"Type":"Ping","Payload":{}}
+[09/03/15 17:20:31] [DEBG] [ctl:4696f3b5] Reading message with length: 28
+[09/03/15 17:20:31] [DEBG] [ctl:4696f3b5] Read message {"Type":"Pong","Payload":{}}
+[09/03/15 17:20:31] [DEBG] [ctl:4696f3b5] Waiting to read message
+[09/03/15 17:20:51] [DEBG] [ctl:4696f3b5] Writing message: {"Type":"Ping","Payload":{}}
+[09/03/15 17:20:51] [DEBG] [ctl:4696f3b5] Reading message with length: 28
+[09/03/15 17:20:51] [DEBG] [ctl:4696f3b5] Read message {"Type":"Pong","Payload":{}}
+[09/03/15 17:20:51] [DEBG] [ctl:4696f3b5] Waiting to read message
+[09/03/15 17:21:11] [DEBG] [ctl:4696f3b5] Writing message: {"Type":"Ping","Payload":{}}
+[09/03/15 17:21:11] [DEBG] [ctl:4696f3b5] Reading message with length: 28
+[09/03/15 17:21:11] [DEBG] [ctl:4696f3b5] Read message {"Type":"Pong","Payload":{}}
+[09/03/15 17:21:11] [DEBG] [ctl:4696f3b5] Waiting to read message
+[09/03/15 17:21:31] [DEBG] [ctl:4696f3b5] Writing message: {"Type":"Ping","Payload":{}}
+[09/03/15 17:21:31] [DEBG] [ctl:4696f3b5] Reading message with length: 28
+[09/03/15 17:21:31] [DEBG] [ctl:4696f3b5] Read message {"Type":"Pong","Payload":{}}
+[09/03/15 17:21:31] [DEBG] [ctl:4696f3b5] Waiting to read message
+[09/03/15 17:21:51] [DEBG] [ctl:4696f3b5] Writing message: {"Type":"Ping","Payload":{}}
+[09/03/15 17:21:51] [DEBG] [ctl:4696f3b5] Reading message with length: 28
+[09/03/15 17:21:51] [DEBG] [ctl:4696f3b5] Read message {"Type":"Pong","Payload":{}}
+[09/03/15 17:21:51] [DEBG] [ctl:4696f3b5] Waiting to read message
+[09/03/15 17:22:11] [DEBG] [ctl:4696f3b5] Writing message: {"Type":"Ping","Payload":{}}
+[09/03/15 17:22:11] [DEBG] [ctl:4696f3b5] Reading message with length: 28
+[09/03/15 17:22:11] [DEBG] [ctl:4696f3b5] Read message {"Type":"Pong","Payload":{}}
+[09/03/15 17:22:11] [DEBG] [ctl:4696f3b5] Waiting to read message
+[09/03/15 17:22:31] [DEBG] [ctl:4696f3b5] Writing message: {"Type":"Ping","Payload":{}}
+[09/03/15 17:22:31] [DEBG] [ctl:4696f3b5] Reading message with length: 28
+[09/03/15 17:22:31] [DEBG] [ctl:4696f3b5] Read message {"Type":"Pong","Payload":{}}
+[09/03/15 17:22:31] [DEBG] [ctl:4696f3b5] Waiting to read message
+[09/03/15 17:22:51] [DEBG] [ctl:4696f3b5] Writing message: {"Type":"Ping","Payload":{}}
+[09/03/15 17:22:51] [DEBG] [ctl:4696f3b5] Reading message with length: 28
+[09/03/15 17:22:51] [DEBG] [ctl:4696f3b5] Read message {"Type":"Pong","Payload":{}}
+[09/03/15 17:22:51] [DEBG] [ctl:4696f3b5] Waiting to read message
+[09/03/15 17:23:11] [DEBG] [ctl:4696f3b5] Writing message: {"Type":"Ping","Payload":{}}
+[09/03/15 17:23:11] [DEBG] [ctl:4696f3b5] Reading message with length: 28
+[09/03/15 17:23:11] [DEBG] [ctl:4696f3b5] Read message {"Type":"Pong","Payload":{}}
+[09/03/15 17:23:11] [DEBG] [ctl:4696f3b5] Waiting to read message
+[09/03/15 17:23:31] [DEBG] [ctl:4696f3b5] Writing message: {"Type":"Ping","Payload":{}}
+[09/03/15 17:23:31] [DEBG] [ctl:4696f3b5] Reading message with length: 28
+[09/03/15 17:23:31] [DEBG] [ctl:4696f3b5] Read message {"Type":"Pong","Payload":{}}
+[09/03/15 17:23:31] [DEBG] [ctl:4696f3b5] Waiting to read message
+[09/03/15 17:23:51] [DEBG] [ctl:4696f3b5] Writing message: {"Type":"Ping","Payload":{}}
+[09/03/15 17:23:51] [DEBG] [ctl:4696f3b5] Reading message with length: 28
+[09/03/15 17:23:51] [DEBG] [ctl:4696f3b5] Read message {"Type":"Pong","Payload":{}}
+[09/03/15 17:23:51] [DEBG] [ctl:4696f3b5] Waiting to read message
+[09/03/15 17:24:11] [DEBG] [ctl:4696f3b5] Writing message: {"Type":"Ping","Payload":{}}
+[09/03/15 17:24:11] [DEBG] [ctl:4696f3b5] Reading message with length: 28
+[09/03/15 17:24:11] [DEBG] [ctl:4696f3b5] Read message {"Type":"Pong","Payload":{}}
+[09/03/15 17:24:11] [DEBG] [ctl:4696f3b5] Waiting to read message
+[09/03/15 17:24:31] [DEBG] [ctl:4696f3b5] Writing message: {"Type":"Ping","Payload":{}}
+[09/03/15 17:24:31] [DEBG] [ctl:4696f3b5] Reading message with length: 28
+[09/03/15 17:24:31] [DEBG] [ctl:4696f3b5] Read message {"Type":"Pong","Payload":{}}
+[09/03/15 17:24:31] [DEBG] [ctl:4696f3b5] Waiting to read message
+[09/03/15 17:24:51] [DEBG] [ctl:4696f3b5] Writing message: {"Type":"Ping","Payload":{}}
+[09/03/15 17:24:51] [DEBG] [ctl:4696f3b5] Reading message with length: 28
+[09/03/15 17:24:51] [DEBG] [ctl:4696f3b5] Read message {"Type":"Pong","Payload":{}}
+[09/03/15 17:24:51] [DEBG] [ctl:4696f3b5] Waiting to read message
+[09/03/15 17:25:11] [DEBG] [ctl:4696f3b5] Writing message: {"Type":"Ping","Payload":{}}
+[09/03/15 17:25:11] [DEBG] [ctl:4696f3b5] Reading message with length: 28
+[09/03/15 17:25:11] [DEBG] [ctl:4696f3b5] Read message {"Type":"Pong","Payload":{}}
+[09/03/15 17:25:11] [DEBG] [ctl:4696f3b5] Waiting to read message
+2015-09-09 10:23:05,615 Exception on /exp [GET]
+Traceback (most recent call last):
+  File "/Users/dan/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/dan/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/dan/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/dan/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/dan/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/dan/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/PsiTurk-2.1.2.dev0-py2.7.egg/psiturk/user_utils.py", line 20, in new_func
+    resp = make_response(func(*args, **kwargs))
+  File "/Users/dan/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/PsiTurk-2.1.2.dev0-py2.7.egg/psiturk/experiment.py", line 350, in start_exp
+    filter(Participant.workerid == worker_id).\
+  File "build/bdist.macosx-10.6-x86_64/egg/sqlalchemy/orm/query.py", line 2241, in all
+    return list(self)
+  File "build/bdist.macosx-10.6-x86_64/egg/sqlalchemy/orm/query.py", line 2353, in __iter__
+    return self._execute_and_instances(context)
+  File "build/bdist.macosx-10.6-x86_64/egg/sqlalchemy/orm/query.py", line 2368, in _execute_and_instances
+    result = conn.execute(querycontext.statement, self._params)
+  File "build/bdist.macosx-10.6-x86_64/egg/sqlalchemy/engine/base.py", line 662, in execute
+    params)
+  File "build/bdist.macosx-10.6-x86_64/egg/sqlalchemy/engine/base.py", line 761, in _execute_clauseelement
+    compiled_sql, distilled_params
+  File "build/bdist.macosx-10.6-x86_64/egg/sqlalchemy/engine/base.py", line 874, in _execute_context
+    context)
+  File "build/bdist.macosx-10.6-x86_64/egg/sqlalchemy/engine/base.py", line 1024, in _handle_dbapi_exception
+    exc_info
+  File "build/bdist.macosx-10.6-x86_64/egg/sqlalchemy/util/compat.py", line 196, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb)
+  File "build/bdist.macosx-10.6-x86_64/egg/sqlalchemy/engine/base.py", line 867, in _execute_context
+    context)
+  File "build/bdist.macosx-10.6-x86_64/egg/sqlalchemy/engine/default.py", line 324, in do_execute
+    cursor.execute(statement, parameters)
+  File "/Users/dan/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/MySQLdb/cursors.py", line 205, in execute
+    self.errorhandler(self, exc, value)
+  File "/Users/dan/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/MySQLdb/connections.py", line 36, in defaulterrorhandler
+    raise errorclass, errorvalue
+OperationalError: (OperationalError) (2006, 'MySQL server has gone away') 'SELECT cohcon_main_live.uniqueid AS cohcon_main_live_uniqueid, cohcon_main_live.assignmentid AS cohcon_main_live_assignmentid, cohcon_main_live.workerid AS cohcon_main_live_workerid, cohcon_main_live.hitid AS cohcon_main_live_hitid, cohcon_main_live.ipaddress AS cohcon_main_live_ipaddress, cohcon_main_live.browser AS cohcon_main_live_browser, cohcon_main_live.platform AS cohcon_main_live_platform, cohcon_main_live.language AS cohcon_main_live_language, cohcon_main_live.cond AS cohcon_main_live_cond, cohcon_main_live.counterbalance AS cohcon_main_live_counterbalance, cohcon_main_live.codeversion AS cohcon_main_live_codeversion, cohcon_main_live.beginhit AS cohcon_main_live_beginhit, cohcon_main_live.beginexp AS cohcon_main_live_beginexp, cohcon_main_live.endhit AS cohcon_main_live_endhit, cohcon_main_live.bonus AS cohcon_main_live_bonus, cohcon_main_live.status AS cohcon_main_live_status, cohcon_main_live.datastring AS cohcon_main_live_datastring \nFROM cohcon_main_live \nWHERE cohcon_main_live.workerid = %s' (u'debugO2GYQ6',)
+2015-09-09 10:23:31,819 Exception on /exp [GET]
+Traceback (most recent call last):
+  File "/Users/dan/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/dan/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/dan/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/dan/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/dan/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/dan/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/PsiTurk-2.1.2.dev0-py2.7.egg/psiturk/user_utils.py", line 20, in new_func
+    resp = make_response(func(*args, **kwargs))
+  File "/Users/dan/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/PsiTurk-2.1.2.dev0-py2.7.egg/psiturk/experiment.py", line 350, in start_exp
+    filter(Participant.workerid == worker_id).\
+  File "build/bdist.macosx-10.6-x86_64/egg/sqlalchemy/orm/query.py", line 2241, in all
+    return list(self)
+  File "build/bdist.macosx-10.6-x86_64/egg/sqlalchemy/orm/query.py", line 2353, in __iter__
+    return self._execute_and_instances(context)
+  File "build/bdist.macosx-10.6-x86_64/egg/sqlalchemy/orm/query.py", line 2368, in _execute_and_instances
+    result = conn.execute(querycontext.statement, self._params)
+  File "build/bdist.macosx-10.6-x86_64/egg/sqlalchemy/engine/base.py", line 662, in execute
+    params)
+  File "build/bdist.macosx-10.6-x86_64/egg/sqlalchemy/engine/base.py", line 761, in _execute_clauseelement
+    compiled_sql, distilled_params
+  File "build/bdist.macosx-10.6-x86_64/egg/sqlalchemy/engine/base.py", line 874, in _execute_context
+    context)
+  File "build/bdist.macosx-10.6-x86_64/egg/sqlalchemy/engine/base.py", line 1024, in _handle_dbapi_exception
+    exc_info
+  File "build/bdist.macosx-10.6-x86_64/egg/sqlalchemy/util/compat.py", line 196, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb)
+  File "build/bdist.macosx-10.6-x86_64/egg/sqlalchemy/engine/base.py", line 867, in _execute_context
+    context)
+  File "build/bdist.macosx-10.6-x86_64/egg/sqlalchemy/engine/default.py", line 324, in do_execute
+    cursor.execute(statement, parameters)
+  File "/Users/dan/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/MySQLdb/cursors.py", line 205, in execute
+    self.errorhandler(self, exc, value)
+  File "/Users/dan/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/MySQLdb/connections.py", line 36, in defaulterrorhandler
+    raise errorclass, errorvalue
+OperationalError: (OperationalError) (2006, 'MySQL server has gone away') 'SELECT cohcon_main_live.uniqueid AS cohcon_main_live_uniqueid, cohcon_main_live.assignmentid AS cohcon_main_live_assignmentid, cohcon_main_live.workerid AS cohcon_main_live_workerid, cohcon_main_live.hitid AS cohcon_main_live_hitid, cohcon_main_live.ipaddress AS cohcon_main_live_ipaddress, cohcon_main_live.browser AS cohcon_main_live_browser, cohcon_main_live.platform AS cohcon_main_live_platform, cohcon_main_live.language AS cohcon_main_live_language, cohcon_main_live.cond AS cohcon_main_live_cond, cohcon_main_live.counterbalance AS cohcon_main_live_counterbalance, cohcon_main_live.codeversion AS cohcon_main_live_codeversion, cohcon_main_live.beginhit AS cohcon_main_live_beginhit, cohcon_main_live.beginexp AS cohcon_main_live_beginexp, cohcon_main_live.endhit AS cohcon_main_live_endhit, cohcon_main_live.bonus AS cohcon_main_live_bonus, cohcon_main_live.status AS cohcon_main_live_status, cohcon_main_live.datastring AS cohcon_main_live_datastring \nFROM cohcon_main_live \nWHERE cohcon_main_live.workerid = %s' (u'debugO2GYQ6',)
+2015-09-25 15:40:30,718 hit_assign_worker_id_not_set_in_exp (1003) {}
+2015-09-25 15:40:44,811 Exception on /dashboard [GET]
+Traceback (most recent call last):
+  File "/Users/dan/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/dan/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/dan/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/dan/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/dan/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/dan/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/PsiTurk-2.1.2.dev0-py2.7.egg/psiturk/experiment.py", line 659, in regularpage
+    return render_template(pagename)
+  File "/Users/dan/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/flask/templating.py", line 127, in render_template
+    return _render(ctx.app.jinja_env.get_or_select_template(template_name_or_list),
+  File "/Users/dan/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/jinja2/environment.py", line 851, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "/Users/dan/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/jinja2/environment.py", line 812, in get_template
+    return self._load_template(name, self.make_globals(globals))
+  File "/Users/dan/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/jinja2/environment.py", line 774, in _load_template
+    cache_key = self.loader.get_source(self, name)[1]
+  File "/Users/dan/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/flask/templating.py", line 64, in get_source
+    raise TemplateNotFound(template)
+TemplateNotFound: dashboard
+2015-09-25 15:40:51,602 Exception on /jglTaskjs [GET]
+Traceback (most recent call last):
+  File "/Users/dan/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/dan/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/dan/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/dan/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/dan/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/dan/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/PsiTurk-2.1.2.dev0-py2.7.egg/psiturk/experiment.py", line 659, in regularpage
+    return render_template(pagename)
+  File "/Users/dan/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/flask/templating.py", line 127, in render_template
+    return _render(ctx.app.jinja_env.get_or_select_template(template_name_or_list),
+  File "/Users/dan/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/jinja2/environment.py", line 851, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "/Users/dan/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/jinja2/environment.py", line 812, in get_template
+    return self._load_template(name, self.make_globals(globals))
+  File "/Users/dan/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/jinja2/environment.py", line 774, in _load_template
+    cache_key = self.loader.get_source(self, name)[1]
+  File "/Users/dan/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/flask/templating.py", line 64, in get_source
+    raise TemplateNotFound(template)
+TemplateNotFound: jglTaskjs
+2015-09-25 15:41:07,233 hit_assign_worker_id_not_set_in_mturk (1001) {}
