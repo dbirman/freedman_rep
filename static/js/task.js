@@ -8,6 +8,10 @@ function cohcon() {
 
 	var instructionPages = [ // add as a list as many pages as you like
 		"instructions/instruct-1.html",
+		"instructions/instruct-2.html",
+		"instructions/instruct-3.html",
+		"instructions/instruct-4.html",
+		"instructions/instruct-5.html",
 		"instructions/instruct-ready.html"
 	];
 
@@ -65,7 +69,7 @@ function cohcon() {
 	task[0][phases.task].parameter.match = [0,1];
 	if (stimulus.categories) {
 		task[0][phases.task].parameter.direction = [0,1];
-		task[0][phases.task].parameter.nomatchdir = [0,1,2,3];
+		task[0][phases.task].parameter.nomatchdir = [0];
 	} else {
 		task[0][phases.task].parameter.direction = params.directions;
 		task[0][phases.task].parameter.nomatchdir = [-Math.PI*4/8,-Math.PI*3/8,-Math.PI*2/8,Math.PI*2/8,Math.PI*3/8,Math.PI*4/8];
@@ -108,14 +112,15 @@ var startTrialCallback = function(task, myscreen) {
 	jglData.direction.push(task.thistrial.direction);
 	stimulus.gotResp = 0;
 
-	flip = [1, 0];
-	if stimulus.categories {
-		stimulus.rot1 = randomElement(stimulus.categoryGroups[task.thistrial.direction]);
+	var flip = [1, 0];
+	if (stimulus.categories) {
+		stimulus.rot1 = randomElement(stimulus.categoryGroups[task.thistrial.direction]) * Math.PI * 2 / 8;
 		if (task.thistrial.match) {
 			// matching trial, use same category
-			stimulus.rot2 = randomElement(stimulus.categoryGroups[task.thistrial.direction]);
+			stimulus.rot2 = randomElement(stimulus.categoryGroups[task.thistrial.direction]) * Math.PI * 2 / 8;
 		} else {
-			stimulus.rot2 = randomElement(stimulus.categoryGroups[flip[task.thistrial.direction]]);
+
+			stimulus.rot2 = randomElement(stimulus.categoryGroups[flip[task.thistrial.direction]]) * Math.PI * 2 / 8;
 		}
 	} else {
 		stimulus.rot1 = task.thistrial.direction * Math.PI * 2 / 8;
@@ -125,6 +130,8 @@ var startTrialCallback = function(task, myscreen) {
 			stimulus.rot2 = task.thistrial.direction * Math.PI * 2 / 8 + task.thistrial.nomatchdir;
 		}
 	}
+	console.log(stimulus.rot1);
+			console.log(stimulus.rot2);
 
 	stimulus.dots.T = add(multiply(rand(task,stimulus.dots.n), (stimulus.dots.maxT-stimulus.dots.minT)),stimulus.dots.minT);
 	stimulus.dots.R = add(multiply(rand(task,stimulus.dots.n), (stimulus.dots.maxR-stimulus.dots.minR)),stimulus.dots.minR);	
@@ -187,6 +194,15 @@ var screenUpdateCallback = function(task, myscreen) {
 	jglClearScreen(0);
 
 	var segs = stimulus.seg;
+
+	if (task.thistrial.match) {
+	jglTextSet('Arial',1,'#ffffff',0,0);
+	jglTextDraw('match',5 * - .22,-4); 
+	} else {
+
+	jglTextSet('Arial',1,'#ffffff',0,0);
+	jglTextDraw('nomatch',5 * - .22,-4);
+	}
 
 	switch (task.thistrial.thisseg) {
 		case segs.wait:
