@@ -1,7 +1,7 @@
 [HIT Configuration]
 title = Perception Experiment
-description = Pay attention the contrast and motion of dots.
-amt_keywords = Perception, Psychology
+description = Discover the rule!
+amt_keywords = Perception, Rules, Decision Making, Psychology
 lifetime = 2
 us_only = true
 approve_requirement = 95
@@ -13,7 +13,7 @@ browser_exclude_rule = MSIE, mobile, tablet
 
 [Database Parameters]
 database_url = mysql://ggrugruturk1:bK2lzJ7tKVSG27cR@mysql-user.stanford.edu/g_gru_gruturk1 
-table_name = cohcon_main_live
+table_name = freedman_sdbx
 
 [Server Parameters]
 host = 0.0.0.0
