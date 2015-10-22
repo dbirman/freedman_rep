@@ -1,5 +1,5 @@
 <div class="postSample" id="container-questionnaire">
-    <h1>Example Complete</h1>
+    <h1>Break</h1>
 
     <hr>
 
@@ -11,8 +11,8 @@
             <!-- beginning of a question -->
             <div class="row question">
                 <div class="col-md-8">
-								  Pay Attention to CONTRAST (ignore motion)
-								</div>
+                                  Please take a break. Continue when you are ready.
+                                </div>
                 <div class="col-md-4">
                 </div>
             </div>
@@ -29,28 +29,12 @@
             <div class="col-xs-7">
             </div>
             <div class="col-xs-3">
-                <button type="button" id="next" value="next" class="btn btn-primary btn-lg continue" onclick="endPostSample();">
+                <button type="button" id="next" value="next" class="btn btn-primary btn-lg continue" onclick="nextPhase();">
                     Continue <span class="glyphicon glyphicon-arrow-right"></span>
                 </button>
             </div>
         </div>
     </div>
-    <script>
-    function endPostSample() {
-			if (!$("#crossings").val()) {
-        $("#crossings").css("background-color", "red");
-				return;
-			}
-      jglData.postSample = {};
-      $(":input").not("#next").each(function() {
-        eval("jglData.postSample." + $(this).attr("id") + " = " + $(this).val());  
-			});
-			nextPhase();
-		}
 
-		$("#crossings").click(function() {
-			$(this).css("background-color", "white");
-		});
-		</script>
 
 </div>

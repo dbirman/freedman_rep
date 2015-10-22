@@ -27,8 +27,16 @@ function cohcon() {
 	var phases = {};
 	// phases.survey1 = 0;
 	phases.survey2 = 0;
-	// phases.instructions = 2;
-	phases.task = 1;
+	phases.instructions = 1;
+	phases.task = [2,4,6,8];
+	phases.newrule = 9;
+	phases.catTask = [10, 12, 14, 16, 18, 20];
+	phases.post1 = 21;
+	phases.teachRule = 22;
+	phases.post2 = 23;
+	phases.ending = 24;
+	phases.catKnown = [25];
+	phases.post3 = 26;
 
 	var segs = {};
 	segs.wait = 0;
@@ -41,6 +49,7 @@ function cohcon() {
 
 	var params = {};
 	params.directions = [0,1,2,3,4,5,6,7]
+	params.trials = 1;
 
 	window.task = [];
 	task[0] = [];
@@ -50,40 +59,145 @@ function cohcon() {
 	task[0][phases.survey2] = initSurvey();
 	task[0][phases.survey2].html = "surveyScreen.html";
 
-	// task[0][phases.i] = initInstructions(instructionPages);
+	task[0][phases.instructions] = initInstructions(instructionPages);
 
 	window.stimulus = {};
 	initStimulus('stimulus');
 	myInitStimulus(task);
 	// stimulus.categories = randomElement([0,1]);
-	stimulus.categories = 1;
+	stimulus.categories = -1;
 	stimulus.categoryGroups = [[0,1,2,3],[4,5,6,7]];
 	stimulus.seg = segs;
 
+	///////// BLOCK: DIRECTIONS //////////
 
-	task[0][phases.task] = {};
-	task[0][phases.task].waitForBacktick = 0;
-	task[0][phases.task].seglen = [2, .650, .650, 1.000, .667,2,1];
-	task[0][phases.task].numTrials = 10;
-	task[0][phases.task].parameter = {};
-	task[0][phases.task].parameter.match = [0,1];
-	if (stimulus.categories) {
-		task[0][phases.task].parameter.direction = [0,1];
-		task[0][phases.task].parameter.nomatchdir = [0];
-	} else {
-		task[0][phases.task].parameter.direction = params.directions;
-		task[0][phases.task].parameter.nomatchdir = [-Math.PI*4/8,-Math.PI*3/8,-Math.PI*2/8,Math.PI*2/8,Math.PI*3/8,Math.PI*4/8];
+	var readylen = [2, 1, 0, 0];
+	var resplen = [2,1.5,1,1];
+	var getred = [1,1,0,0];
+
+	for (var i = 0; i < phases.task.length; i++) {
+		ct = phases.task[i];
+
+		task[0][ct] = {};
+		task[0][ct].waitForBacktick = 0;
+		task[0][ct].seglen = [readylen[i], .650, .650, 1.000, .667,2,resplen[i]];
+		task[0][ct].numTrials = params.trials;
+		task[0][ct].parameter = {};
+		task[0][ct].parameter.match = [0,1];
+		task[0][ct].parameter.categories = 0;
+		task[0][ct].parameter.known = 0;
+		task[0][ct].parameter.showresp = 1;
+		task[0][ct].parameter.getready = getred[i];
+		if (task[0][ct].parameter.categories==1) {
+			task[0][ct].parameter.direction = [0,1];
+			task[0][ct].parameter.nomatchdir = [0];
+		} else {
+			task[0][ct].parameter.direction = params.directions;
+			task[0][ct].parameter.nomatchdir = [-Math.PI*4/8,-Math.PI*3/8,-Math.PI*2/8,Math.PI*2/8,Math.PI*3/8,Math.PI*4/8];
+		}
+		task[0][ct].random = 1;
+		task[0][ct].usingScreen = 1;
+		task[0][ct].getResponse = [0,0,0,0,0,1,0];
+		task[0][ct].html = "canvas.html";
+
+		task[0][ct] = initTask(task[0][ct], startSegmentCallback, screenUpdateCallback, getResponseCallback, startTrialCallback,endTrialCallbackPrac,[],blockRandomization);
+
+		if (i < phases.task.length-1) {
+			task[0][ct+1] = initSurvey();
+			task[0][ct+1].html = "break.html";
+		}
+
 	}
-	task[0][phases.task].random = 1;
-	task[0][phases.task].usingScreen = 1;
-	task[0][phases.task].getResponse = [0,0,0,0,0,1,0];
-	task[0][phases.task].html = "canvas.html";
 
-	task[0][phases.task] = initTask(task[0][phases.task], startSegmentCallback, screenUpdateCallback, getResponseCallback, startTrialCallback,endTrialCallbackPrac,[],blockRandomization);
-	// task[0][phases.train2] = initTask(task[0][phases.train2], startSegmentCallback, screenUpdateCallback, getResponseCallback, startTrialCallback,endTrialCallbackPrac,[],blockRandomization);
-	// task[0][phases.e1] = initTask(task[0][phases.e1], startSegmentCallback, screenUpdateCallback, getResponseCallback, startTrialCallback,[],[],blockRandomization);
-	// task[0][phases.c] = initTask(task[0][phases.c], startSegmentCallback, screenUpdateCallback, getResponseCallback, startTrialCallback,[],[],blockRandomization);
-	// task[0][phases.e2] = initTask(task[0][phases.e2], startSegmentCallback, screenUpdateCallback, getResponseCallback, startTrialCallback,[],[],blockRandomization);
+	task[0][phases.newrule] = initSurvey();
+	task[0][phases.newrule].html = "newrule.html";
+
+	readylen = [1,0,0,0,0,0];
+
+	for (var i = 0; i < phases.catTask.length; i++) {
+		ct = phases.catTask[i];
+
+		task[0][ct] = {};
+		task[0][ct].waitForBacktick = 0;
+		task[0][ct].seglen = [readylen[i], .650, .650, 1.000, .667,2,1];
+		task[0][ct].numTrials = params.trials;
+		task[0][ct].parameter = {};
+		task[0][ct].parameter.match = [0,1];
+		task[0][ct].parameter.categories = 1;
+		task[0][ct].parameter.known = 0;
+		task[0][ct].parameter.showresp = 0;
+		task[0][ct].parameter.getready = 0;
+		if (task[0][ct].parameter.categories==1) {
+			task[0][ct].parameter.direction = [0,1];
+			task[0][ct].parameter.nomatchdir = [0];
+		} else {
+			task[0][ct].parameter.direction = params.directions;
+			task[0][ct].parameter.nomatchdir = [-Math.PI*4/8,-Math.PI*3/8,-Math.PI*2/8,Math.PI*2/8,Math.PI*3/8,Math.PI*4/8];
+		}
+		task[0][ct].random = 1;
+		task[0][ct].usingScreen = 1;
+		task[0][ct].getResponse = [0,0,0,0,0,1,0];
+		task[0][ct].html = "canvas.html";
+
+		task[0][ct] = initTask(task[0][ct], startSegmentCallback, screenUpdateCallback, getResponseCallback, startTrialCallback,endTrialCallbackPrac,[],blockRandomization);
+
+		if (i < phases.catTask.length-1) {
+			task[0][ct+1] = initSurvey();
+			task[0][ct+1].html = "break.html";
+		}
+
+	}
+	task[0][phases.post1] = initSurvey();
+	task[0][phases.post1].html = "post1.html";
+	task[0][phases.teachRule] = initSurvey();
+	task[0][phases.teachRule].html = "teachRule.html";
+	task[0][phases.post2] = initSurvey();
+	task[0][phases.post2].html = "post2.html";
+	task[0][phases.ending] = initSurvey();
+	task[0][phases.ending].html = "ending.html";
+
+	//////FINAL STAGE
+
+	readylen = [0];
+
+	for (var i = 0; i < phases.catKnown.length; i++) {
+		ct = phases.catKnown[i];
+
+		task[0][ct] = {};
+		task[0][ct].waitForBacktick = 0;
+		task[0][ct].seglen = [readylen[i], .650, .650, 1.000, .667,2,1];
+		task[0][ct].numTrials = params.trials;
+		task[0][ct].parameter = {};
+		task[0][ct].parameter.match = [0,1];
+		task[0][ct].parameter.categories = 1;
+		task[0][ct].parameter.known = 1;
+		task[0][ct].parameter.showresp = 0;
+		task[0][ct].parameter.getready = 0;
+		if (task[0][ct].parameter.categories==1) {
+			task[0][ct].parameter.direction = [0,1];
+			task[0][ct].parameter.nomatchdir = [0];
+		} else {
+			task[0][ct].parameter.direction = params.directions;
+			task[0][ct].parameter.nomatchdir = [-Math.PI*4/8,-Math.PI*3/8,-Math.PI*2/8,Math.PI*2/8,Math.PI*3/8,Math.PI*4/8];
+		}
+		task[0][ct].random = 1;
+		task[0][ct].usingScreen = 1;
+		task[0][ct].getResponse = [0,0,0,0,0,1,0];
+		task[0][ct].html = "canvas.html";
+
+		task[0][ct] = initTask(task[0][ct], startSegmentCallback, screenUpdateCallback, getResponseCallback, startTrialCallback,endTrialCallbackPrac,[],blockRandomization);
+
+		if (i < phases.catKnown.length-1) {
+			task[0][ct+1] = initSurvey();
+			task[0][ct+1].html = "break.html";
+		}
+
+	}
+
+	task[0][phases.post3] = initSurvey();
+	task[0][phases.post3].html = "post3.html";
+
+	/////
 
 	initTurk();
 
@@ -91,9 +205,12 @@ function cohcon() {
 	jglData.responses = [];
 	jglData.correct = [];
 	jglData.direction = [];
+	jglData.categories = [];
 	jglData.postSurvey = {};
-
-	jglData.categories = stimulus.categories;
+	jglData.match = [];
+	jglData.rot1 = [];
+	jglData.rot2 = [];
+	jglData.known = [];
 
 	startPhase(task[0]);
 }
@@ -104,12 +221,17 @@ var endTrialCallbackPrac = function(task,myscreen) {
 
 var startTrialCallback = function(task, myscreen) {
 
+	stimulus.categories = task.thistrial.categories;
+
 	if(task.thistrial.crit) {
 		task.thistrial.seglen[stimulus.seg.resp] = 5;
 	}
 	jglData.responses.push(-1);
 	jglData.correct.push(0);
 	jglData.direction.push(task.thistrial.direction);
+	jglData.categories.push(stimulus.categories);
+	jglData.known.push(task.thistrial.known);
+	jglData.match.push(task.thistrial.match);
 	stimulus.gotResp = 0;
 
 	var flip = [1, 0];
@@ -130,8 +252,8 @@ var startTrialCallback = function(task, myscreen) {
 			stimulus.rot2 = task.thistrial.direction * Math.PI * 2 / 8 + task.thistrial.nomatchdir;
 		}
 	}
-	console.log(stimulus.rot1);
-			console.log(stimulus.rot2);
+	jglData.rot1.push(stimulus.rot1);
+	jglData.rot2.push(stimulus.rot2);
 
 	stimulus.dots.T = add(multiply(rand(task,stimulus.dots.n), (stimulus.dots.maxT-stimulus.dots.minT)),stimulus.dots.minT);
 	stimulus.dots.R = add(multiply(rand(task,stimulus.dots.n), (stimulus.dots.maxR-stimulus.dots.minR)),stimulus.dots.minR);	
@@ -195,18 +317,9 @@ var screenUpdateCallback = function(task, myscreen) {
 
 	var segs = stimulus.seg;
 
-	if (task.thistrial.match) {
-	jglTextSet('Arial',1,'#ffffff',0,0);
-	jglTextDraw('match',5 * - .22,-4); 
-	} else {
-
-	jglTextSet('Arial',1,'#ffffff',0,0);
-	jglTextDraw('nomatch',5 * - .22,-4);
-	}
-
 	switch (task.thistrial.thisseg) {
 		case segs.wait:
-			upText('Get Ready!','#ffffff');
+			if (task.thistrial.getready) {upText('Get Ready!','#ffffff');}
 			break;
 		case segs.fixation:
 			upFix('#ffffff');
@@ -221,10 +334,10 @@ var screenUpdateCallback = function(task, myscreen) {
 			upDots(task);
 			break;
 		case segs.resp:
-			if (task.trialnum < 10) {
+			if (task.thistrial.showresp && task.trialnum < 10) {
 				upNowRespondText();
 			}
-			upFix('#ffffff');
+			upFix('#ffff00');
 			break;
 		case segs.fback:
 			switch (stimulus.gotResp) {
@@ -260,12 +373,14 @@ function upCorrectText() {
 
 
 function upNowRespondText() {	
-	upText('Respond with Space','#ffffff');
+	jglTextSet('Arial',1,'#ffff00',0,0);
+	jglTextDraw('Respond Now',14 * - .25,-2.75);
+	jglTextDraw('Press Space - or Do Nothing',27 * - .25,-1.75);
 }
 
 function upText(text, color) {
 	jglTextSet('Arial',1,color,0,0);
-	jglTextDraw(text,text.length * - .22,-2.75);
+	jglTextDraw(text,text.length * - .25,-1.75);
 
 }
 
@@ -282,7 +397,7 @@ function upDots(task) {
 function updateDots(task,dots) {
 
 	// Check frequency? Not sure how to do this...
-	freq_factor = 0.2;
+	freq_factor = 0.24;
 
 	// dots.x = add(dots.y,);
 
@@ -337,7 +452,7 @@ function myInitStimulus(task) {
 	stimulus.dots.maxR = 9
 	stimulus.dots.minT = 0;
 	stimulus.dots.maxT = Math.PI*2;
-	stimulus.dots.n = 160;
+	stimulus.dots.n = 140;
 	stimulus.dots.T = add(multiply(rand(task,stimulus.dots.n), (stimulus.dots.maxT-stimulus.dots.minT)),stimulus.dots.minT);
 	stimulus.dots.R = add(multiply(rand(task,stimulus.dots.n), (stimulus.dots.maxR-stimulus.dots.minR)),stimulus.dots.minR);	
 	stimulus.dots.holdx =  multiply(stimulus.dots.R,cos(mod(add(stimulus.dots.T, 0), Math.PI*2)));	
