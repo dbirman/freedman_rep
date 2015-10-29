@@ -145,7 +145,7 @@ ggplot(datad, aes(diff*360/(2*pi),mu)) +
 
 ```{r}
 datac = data %>%
-  filter(categoriesf=='Categories',known==1) %>%
+  filter(categoriesf=='Categories',known==0,btrials>75) %>%
   mutate(rot1d = rot1 * 360/(2*pi)) %>%
   group_by(rot1d) %>%
   summarise(n=n(),mu=mean(correct)) %>%
@@ -178,7 +178,7 @@ pd = data.frame(angle=c(22,67,112,157,202,247,292,337),col=c(0,1,1,1,1,0,0,0),pe
 
 ggplot(pd, aes(angle,perf,fill=factor(col))) +
   geom_bar(stat='identity') +
-  geom_errorbar(width=0) +
+  #geom_errorbar(width=0) +
   scale_y_continuous(breaks=c(0.5,1),limits=c(-.05,1.05)) +
   scale_fill_brewer(palette='Paired') +
   geom_vline(aes(xintercept=c(45,225),color='black')) +
