@@ -1,0 +1,190 @@
+---
+title: "freedman_analysis"
+output: html_document
+---
+```{r}
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(effects)
+library(lme4)
+```
+
+
+```{r}
+files = dir('~/proj/freedman_rep/dircsv/')
+
+adata_dir = data.frame();
+for (fi in 1:length(files)) {
+  fname = files[fi]
+  data = read.csv(paste('~/proj/freedman_rep/dircsv/',fname,sep=''))
+  data = data %>%
+    mutate(wid=fi)
+  adata_dir = rbind(adata_dir,data)
+}
+files = dir('~/proj/freedman_rep/catcsv/')
+
+adata_cat = data.frame();
+for (fi in 1:length(files)) {
+  fname = files[fi]
+  data = read.csv(paste('~/proj/freedman_rep/catcsv/',fname,sep=''))
+  data = data %>%
+    mutate(wid=fi)
+  adata_cat = rbind(adata_cat,data)
+}
+```
+
+```{r}
+```
+
+```{r}
+data = adata_cat
+
+## Remove everybody who showed no performance in known condition
+
+data$correct[data$correct==-1] = 0;
+data = data %>%
+  mutate(catbig = categories)
+data$catbig[data$catbig==1] = 2
+data = data %>%
+  mutate(categoriesf = factor(categories,levels=c(0,1),labels=c('Directions','Categories')),
+         knownf = factor(known,levels=c(0,1),labels=c('Discovered','Known')),
+         matchf = factor(match,levels=c(0,1),labels=c('Unmatched','Matched')),
+         correctf = factor(correct,levels=c(0,1),labels=c('Wrong','Correct')),
+         catknown = factor(catbig+known,levels=c(0,1,2,3),labels=c('Directions','Directions Known','Categories','Categories Known')),
+         btrials = trial+block*max(trial))
+data$corr[data$responses==1] = data$match[data$responses==1];
+data$corr[data$responses==-1] = !as.logical(data$match[data$responses==-1]);
+```
+
+```{r}
+knownperf = data %>%
+  filter(known==1) %>%
+  group_by(wid) %>%
+  summarise(mu=mean(corr))
+
+widlist = c()
+for (i in unique(knownperf$wid)) {
+  if (knownperf$mu[i]<.7) {
+    widlist = c(widlist,i)
+  }
+}
+
+for (w  in widlist) {
+  data = data %>%
+    filter(wid!=w)
+}
+```
+
+
+```{r}
+counts = data %>%
+  group_by(wid) %>%
+  summarise(press = sum(responses==1),nopress=sum(responses==-1))
+```
+
+```{r}
+
+data = data %>%
+  filter(wid!=8, wid!=18, wid!=21, wid!=22, wid!=24, wid!=26)
+```
+
+
+```{r}
+rs = glmer(corr~btrials*catknown+(btrials*catknown|wid),family='binomial',data=data)
+plot(allEffects(rs))
+```
+
+
+```{r}
+data %>%
+ggplot(data=., aes(btrials,corr, color=catknown)) + 
+  geom_point(size=3,position=position_jitter(width=.05,height=.05)) +
+  geom_smooth(method="glm",family='binomial',size=2,se=F) +
+  scale_y_continuous(breaks=c(0,.5,1),limits=c(-0.1,1.1)) +
+  scale_color_brewer(palette='Dark2') +
+  theme_bw() +
+  facet_grid(.~wid) +
+  ylab('Performance Correct (%)') +
+  xlab('Trial #')
+```
+
+```{r}
+```
+
+
+
+```{r}
+data_blocked = data %>%
+  group_by(categoriesf,knownf,block) %>%
+  summarise(n=n(),mean_corr = mean(corr))
+
+#ggplot(data=data_blocked, aes(block,mean_corr, color=categoriesf, fill=knownf, linetype = knownf)) + geom_smooth(method="lm") +geom_point(size=3)
+
+
+ggplot(data=data, aes(block,corr, color=categoriesf, linetype = knownf)) + 
+  geom_smooth(method="glm",family='binomial',size=2) +
+  geom_point(size=3,position=position_jitter(width=.05,height=.05)) +
+  scale_y_continuous(breaks=c(0,.5,1),limits=c(-0.1,1.1)) +
+  scale_color_brewer(palette='Dark2') +
+  facet_grid(.~wid) +
+  theme_bw()
+```
+
+```{r}
+datad = data %>%
+  filter(categoriesf=='Directions',catknown=='Directions Known') %>%
+  mutate(diff = round(rot1-rot2,3)) %>%
+  group_by(diff,wid) %>%
+  summarise(mu=1-mean(corr))
+
+ggplot(datad, aes(diff*360/(2*pi),mu)) + 
+  geom_point(stat='identity') + 
+  geom_smooth(method="loess",color='orange',se=F) +
+```
+
+```{r}
+datac = data %>%
+  filter(categoriesf=='Categories',known==1) %>%
+  mutate(rot1d = rot1 * 360/(2*pi)) %>%
+  group_by(rot1d) %>%
+  summarise(n=n(),mu=mean(correct)) %>%
+  mutate(se= 1*sqrt(mu*(1-mu)/n))
+
+datac$rot1d[datac$rot1d==0] = 360
+datac$rot1d = 360 - datac$rot1d
+
+# ss = max(unique(datac$wid))
+# 
+ss = 1
+datac = cbind(datac,col=c(rep(1,ss),rep(1,ss),rep(1,ss),rep(1,ss),
+                            rep(0,ss),rep(0,ss),rep(0,ss),rep(0,ss)))
+
+ggplot(datac, aes(rot1d,mu,ymin=mu-se,ymax=mu+se,fill=factor(col))) +
+  geom_bar(stat='identity') +
+  geom_errorbar(width=0) +
+  scale_y_continuous(breaks=c(0.5,1),limits=c(-.05,1.05)) +
+  scale_fill_brewer(palette='Paired') +
+  geom_vline(aes(xintercept=c(22.5,360-(180-22.5)),color='black')) +
+  theme_bw() +
+  xlab('Sample Direction (deg)') +
+  ylab('Percent Correct')
+```
+
+```{r}
+## compute plot from paper
+
+pd = data.frame(angle=c(22,67,112,157,202,247,292,337),col=c(0,1,1,1,1,0,0,0),perf=c(.89,.9,.97,.97,.86,.88,.97,.965))
+
+ggplot(pd, aes(angle,perf,fill=factor(col))) +
+  geom_bar(stat='identity') +
+  geom_errorbar(width=0) +
+  scale_y_continuous(breaks=c(0.5,1),limits=c(-.05,1.05)) +
+  scale_fill_brewer(palette='Paired') +
+  geom_vline(aes(xintercept=c(45,225),color='black')) +
+  theme_bw() +
+  xlab('Sample Direction (deg)') +
+  ylab('Percent Correct')
+```
+
+

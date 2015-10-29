@@ -1,6 +1,8 @@
 function info = getAllInfo()%% getAllInfo
 
-files = dir(fullfile(pwd,'mat/*.mat'));
+global analysis
+
+files = dir(fullfile(analysis.dir,'mat/*.mat'));
 
 info = {};
 for fi = 1:length(files)

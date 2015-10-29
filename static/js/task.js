@@ -24,19 +24,29 @@ function cohcon() {
 	// delay = 1013 ms
 	// test = 667 ms
 
+	var taskDir = 2; // 1 = directions, 2 = categories
+
 	var phases = {};
-	// phases.survey1 = 0;
-	phases.survey2 = 0;
-	phases.instructions = 1;
-	phases.task = [2,4,6,8];
-	phases.newrule = 9;
-	phases.catTask = [10, 12, 14, 16, 18, 20];
-	phases.post1 = 21;
-	phases.teachRule = 22;
-	phases.post2 = 23;
-	phases.ending = 24;
-	phases.catKnown = [25];
-	phases.post3 = 26;
+	phases.survey1 = 0;
+	phases.survey2 = 1;
+	phases.instructions = 2;
+	if (taskDir==1) {
+		phases.task = [3,5,7];
+		phases.post0 = 8;
+		phases.teachRule1 = 9;
+		phases.post00 = 10;
+		phases.ending1 = 11;
+		phases.dirKnown = [12];
+		phases.post3 = 13;
+	} else if (taskDir==2) {
+		phases.catTask = [3,5,7,9,11];
+		phases.post1 = 12;
+		phases.teachRule = 13;
+		phases.post2 = 14;
+		phases.ending = 15;
+		phases.catKnown = [16,18];
+		phases.post3 = 19;
+	}
 
 	var segs = {};
 	segs.wait = 0;
@@ -49,12 +59,12 @@ function cohcon() {
 
 	var params = {};
 	params.directions = [0,1,2,3,4,5,6,7]
-	params.trials = 1;
+	params.trials = 30;
 
 	window.task = [];
 	task[0] = [];
-	// task[0][phases.survey1] = initSurvey();
-	// task[0][phases.survey1].html = "surveyDemo.html";
+	task[0][phases.survey1] = initSurvey();
+	task[0][phases.survey1].html = "surveyDemo.html";
 
 	task[0][phases.survey2] = initSurvey();
 	task[0][phases.survey2].html = "surveyScreen.html";
@@ -69,129 +79,178 @@ function cohcon() {
 	stimulus.categoryGroups = [[0,1,2,3],[4,5,6,7]];
 	stimulus.seg = segs;
 
-	///////// BLOCK: DIRECTIONS //////////
+	if (taskDir==1) {
+		///////// BLOCK: DIRECTIONS //////////
 
-	var readylen = [2, 1, 0, 0];
-	var resplen = [2,1.5,1,1];
-	var getred = [1,1,0,0];
+		var readylen = [1.25, 0, 0];
+		var resptime = [2.5,2.25,1.75];
+		var resplen = [1.5,1,1];
+		var getred = [1,0,0];
 
-	for (var i = 0; i < phases.task.length; i++) {
-		ct = phases.task[i];
+		for (var i = 0; i < phases.task.length; i++) {
+			ct = phases.task[i];
 
-		task[0][ct] = {};
-		task[0][ct].waitForBacktick = 0;
-		task[0][ct].seglen = [readylen[i], .650, .650, 1.000, .667,2,resplen[i]];
-		task[0][ct].numTrials = params.trials;
-		task[0][ct].parameter = {};
-		task[0][ct].parameter.match = [0,1];
-		task[0][ct].parameter.categories = 0;
-		task[0][ct].parameter.known = 0;
-		task[0][ct].parameter.showresp = 1;
-		task[0][ct].parameter.getready = getred[i];
-		if (task[0][ct].parameter.categories==1) {
-			task[0][ct].parameter.direction = [0,1];
-			task[0][ct].parameter.nomatchdir = [0];
-		} else {
-			task[0][ct].parameter.direction = params.directions;
-			task[0][ct].parameter.nomatchdir = [-Math.PI*4/8,-Math.PI*3/8,-Math.PI*2/8,Math.PI*2/8,Math.PI*3/8,Math.PI*4/8];
-		}
-		task[0][ct].random = 1;
-		task[0][ct].usingScreen = 1;
-		task[0][ct].getResponse = [0,0,0,0,0,1,0];
-		task[0][ct].html = "canvas.html";
+			task[0][ct] = {};
+			task[0][ct].waitForBacktick = 0;
+			task[0][ct].seglen = [readylen[i], .650, .650, 1.000, .65,resptime[i],resplen[i]];
+			task[0][ct].numTrials = params.trials;
+			task[0][ct].parameter = {};
+			task[0][ct].parameter.match = [0,1];
+			task[0][ct].parameter.categories = 0;
+			task[0][ct].parameter.known = 0;
+			task[0][ct].parameter.showresp = 1;
+			task[0][ct].parameter.getready = getred[i];
+			task[0][ct].parameter.block = i;
+			if (task[0][ct].parameter.categories==1) {
+				task[0][ct].parameter.direction = [0,1];
+				task[0][ct].parameter.nomatchdir = [0];
+			} else {
+				task[0][ct].parameter.direction = params.directions;
+				task[0][ct].parameter.nomatchdir = [-Math.PI*3/8,-Math.PI*2/8,-Math.PI*1/8,Math.PI*1/8,Math.PI*2/8,Math.PI*3/8];
+			}
+			task[0][ct].random = 1;
+			task[0][ct].usingScreen = 1;
+			task[0][ct].getResponse = [0,0,0,0,0,1,0];
+			task[0][ct].html = "canvas.html";
 
-		task[0][ct] = initTask(task[0][ct], startSegmentCallback, screenUpdateCallback, getResponseCallback, startTrialCallback,endTrialCallbackPrac,[],blockRandomization);
+			task[0][ct] = initTask(task[0][ct], startSegmentCallback, screenUpdateCallback, getResponseCallback, startTrialCallback,endTrialCallbackPrac,startBlockCallback,blockRandomization);
 
-		if (i < phases.task.length-1) {
-			task[0][ct+1] = initSurvey();
-			task[0][ct+1].html = "break.html";
-		}
+			if (i < phases.task.length-1) {
+				task[0][ct+1] = initSurvey();
+				task[0][ct+1].html = "break.html";
+			}
 
-	}
-
-	task[0][phases.newrule] = initSurvey();
-	task[0][phases.newrule].html = "newrule.html";
-
-	readylen = [1,0,0,0,0,0];
-
-	for (var i = 0; i < phases.catTask.length; i++) {
-		ct = phases.catTask[i];
-
-		task[0][ct] = {};
-		task[0][ct].waitForBacktick = 0;
-		task[0][ct].seglen = [readylen[i], .650, .650, 1.000, .667,2,1];
-		task[0][ct].numTrials = params.trials;
-		task[0][ct].parameter = {};
-		task[0][ct].parameter.match = [0,1];
-		task[0][ct].parameter.categories = 1;
-		task[0][ct].parameter.known = 0;
-		task[0][ct].parameter.showresp = 0;
-		task[0][ct].parameter.getready = 0;
-		if (task[0][ct].parameter.categories==1) {
-			task[0][ct].parameter.direction = [0,1];
-			task[0][ct].parameter.nomatchdir = [0];
-		} else {
-			task[0][ct].parameter.direction = params.directions;
-			task[0][ct].parameter.nomatchdir = [-Math.PI*4/8,-Math.PI*3/8,-Math.PI*2/8,Math.PI*2/8,Math.PI*3/8,Math.PI*4/8];
-		}
-		task[0][ct].random = 1;
-		task[0][ct].usingScreen = 1;
-		task[0][ct].getResponse = [0,0,0,0,0,1,0];
-		task[0][ct].html = "canvas.html";
-
-		task[0][ct] = initTask(task[0][ct], startSegmentCallback, screenUpdateCallback, getResponseCallback, startTrialCallback,endTrialCallbackPrac,[],blockRandomization);
-
-		if (i < phases.catTask.length-1) {
-			task[0][ct+1] = initSurvey();
-			task[0][ct+1].html = "break.html";
 		}
 
-	}
-	task[0][phases.post1] = initSurvey();
-	task[0][phases.post1].html = "post1.html";
-	task[0][phases.teachRule] = initSurvey();
-	task[0][phases.teachRule].html = "teachRule.html";
-	task[0][phases.post2] = initSurvey();
-	task[0][phases.post2].html = "post2.html";
-	task[0][phases.ending] = initSurvey();
-	task[0][phases.ending].html = "ending.html";
+		task[0][phases.post0] = initSurvey();
+		task[0][phases.post0].html = "post0.html";
+		task[0][phases.teachRule1] = initSurvey();
+		task[0][phases.teachRule1].html = "teachRule1.html";
+		task[0][phases.post00] = initSurvey();
+		task[0][phases.post00].html = "post00.html";
+		task[0][phases.ending1] = initSurvey();
+		task[0][phases.ending1].html = "ending1.html";
 
-	//////FINAL STAGE
+		for (var i = 0; i < phases.dirKnown.length; i++) {
+			ct = phases.dirKnown[i];
 
-	readylen = [0];
+			task[0][ct] = {};
+			task[0][ct].waitForBacktick = 0;
+			task[0][ct].seglen = [0, .650, .650, 1.000, .65,1.75,1];
+			task[0][ct].numTrials = params.trials;
+			task[0][ct].parameter = {};
+			task[0][ct].parameter.match = [0,1];
+			task[0][ct].parameter.categories = 0;
+			task[0][ct].parameter.known = 1;
+			task[0][ct].parameter.showresp = 0;
+			task[0][ct].parameter.getready = 0;
+			task[0][ct].parameter.block = i;
+			if (task[0][ct].parameter.categories==1) {
+				task[0][ct].parameter.direction = [0,1];
+				task[0][ct].parameter.nomatchdir = [0];
+			} else {
+				task[0][ct].parameter.direction = params.directions;
+				task[0][ct].parameter.nomatchdir = [-Math.PI*3/8,-Math.PI*2/8,-Math.PI*1/8,Math.PI*1/8,Math.PI*2/8,Math.PI*3/8];
+			}
+			task[0][ct].random = 1;
+			task[0][ct].usingScreen = 1;
+			task[0][ct].getResponse = [0,0,0,0,0,1,0];
+			task[0][ct].html = "canvas.html";
 
-	for (var i = 0; i < phases.catKnown.length; i++) {
-		ct = phases.catKnown[i];
+			task[0][ct] = initTask(task[0][ct], startSegmentCallback, screenUpdateCallback, getResponseCallback, startTrialCallback,endTrialCallbackPrac,startBlockCallback,blockRandomization);
 
-		task[0][ct] = {};
-		task[0][ct].waitForBacktick = 0;
-		task[0][ct].seglen = [readylen[i], .650, .650, 1.000, .667,2,1];
-		task[0][ct].numTrials = params.trials;
-		task[0][ct].parameter = {};
-		task[0][ct].parameter.match = [0,1];
-		task[0][ct].parameter.categories = 1;
-		task[0][ct].parameter.known = 1;
-		task[0][ct].parameter.showresp = 0;
-		task[0][ct].parameter.getready = 0;
-		if (task[0][ct].parameter.categories==1) {
-			task[0][ct].parameter.direction = [0,1];
-			task[0][ct].parameter.nomatchdir = [0];
-		} else {
-			task[0][ct].parameter.direction = params.directions;
-			task[0][ct].parameter.nomatchdir = [-Math.PI*4/8,-Math.PI*3/8,-Math.PI*2/8,Math.PI*2/8,Math.PI*3/8,Math.PI*4/8];
+			if (i < phases.dirKnown.length-1) {
+				task[0][ct+1] = initSurvey();
+				task[0][ct+1].html = "break.html";
+			}
+
 		}
-		task[0][ct].random = 1;
-		task[0][ct].usingScreen = 1;
-		task[0][ct].getResponse = [0,0,0,0,0,1,0];
-		task[0][ct].html = "canvas.html";
+	} else if (taskDir==2) {
 
-		task[0][ct] = initTask(task[0][ct], startSegmentCallback, screenUpdateCallback, getResponseCallback, startTrialCallback,endTrialCallbackPrac,[],blockRandomization);
+		var readylen = [1.25, 0, 0,0,0];
+		var resptime = [2.5,2.25,1.75,1.75,1.75];
+		var resplen = [1.5,1,1,1,1];
+		var getred = [1,0,0,0,0];
 
-		if (i < phases.catKnown.length-1) {
-			task[0][ct+1] = initSurvey();
-			task[0][ct+1].html = "break.html";
+		for (var i = 0; i < phases.catTask.length; i++) {
+			ct = phases.catTask[i];
+
+			task[0][ct] = {};
+			task[0][ct].waitForBacktick = 0;
+			task[0][ct].seglen = [readylen[i], .650, .650, 1.000, .65,resptime[i],resplen[i]];
+			task[0][ct].numTrials = params.trials;
+			task[0][ct].parameter = {};
+			task[0][ct].parameter.match = [0,1];
+			task[0][ct].parameter.categories = 1;
+			task[0][ct].parameter.known = 0;
+			task[0][ct].parameter.showresp = 1;
+			task[0][ct].parameter.getready = getred[i];
+			task[0][ct].parameter.block = i;
+			if (task[0][ct].parameter.categories==1) {
+				task[0][ct].parameter.direction = [0,1];
+				task[0][ct].parameter.nomatchdir = [0];
+			} else {
+				task[0][ct].parameter.direction = params.directions;
+				task[0][ct].parameter.nomatchdir = [-Math.PI*4/8,-Math.PI*3/8,-Math.PI*2/8,Math.PI*2/8,Math.PI*3/8,Math.PI*4/8];
+			}
+			task[0][ct].random = 1;
+			task[0][ct].usingScreen = 1;
+			task[0][ct].getResponse = [0,0,0,0,0,1,0];
+			task[0][ct].html = "canvas.html";
+
+			task[0][ct] = initTask(task[0][ct], startSegmentCallback, screenUpdateCallback, getResponseCallback, startTrialCallback,endTrialCallbackPrac,startBlockCallback,blockRandomization);
+
+			if (i < phases.catTask.length-1) {
+				task[0][ct+1] = initSurvey();
+				task[0][ct+1].html = "break.html";
+			}
+
 		}
+		task[0][phases.post1] = initSurvey();
+		task[0][phases.post1].html = "post1.html";
+		task[0][phases.teachRule] = initSurvey();
+		task[0][phases.teachRule].html = "teachRule.html";
+		task[0][phases.post2] = initSurvey();
+		task[0][phases.post2].html = "post2.html";
+		task[0][phases.ending] = initSurvey();
+		task[0][phases.ending].html = "ending.html";
 
+		//////FINAL STAGE
+
+		for (var i = 0; i < phases.catKnown.length; i++) {
+			ct = phases.catKnown[i];
+
+			task[0][ct] = {};
+			task[0][ct].waitForBacktick = 0;
+			task[0][ct].seglen = [0, .650, .650, 1.000, .667,1.75,1];
+			task[0][ct].numTrials = params.trials;
+			task[0][ct].parameter = {};
+			task[0][ct].parameter.match = [0,1];
+			task[0][ct].parameter.categories = 1;
+			task[0][ct].parameter.known = 1;
+			task[0][ct].parameter.showresp = 0;
+			task[0][ct].parameter.getready = 0;
+			task[0][ct].parameter.block = i;
+			if (task[0][ct].parameter.categories==1) {
+				task[0][ct].parameter.direction = [0,1];
+				task[0][ct].parameter.nomatchdir = [0];
+			} else {
+				task[0][ct].parameter.direction = params.directions;
+				task[0][ct].parameter.nomatchdir = [-Math.PI*4/8,-Math.PI*3/8,-Math.PI*2/8,Math.PI*2/8,Math.PI*3/8,Math.PI*4/8];
+			}
+			task[0][ct].random = 1;
+			task[0][ct].usingScreen = 1;
+			task[0][ct].getResponse = [0,0,0,0,0,1,0];
+			task[0][ct].html = "canvas.html";
+
+			task[0][ct] = initTask(task[0][ct], startSegmentCallback, screenUpdateCallback, getResponseCallback, startTrialCallback,endTrialCallbackPrac,startBlockCallback,blockRandomization);
+
+			if (i < phases.catKnown.length-1) {
+				task[0][ct+1] = initSurvey();
+				task[0][ct+1].html = "break.html";
+			}
+
+		}
 	}
 
 	task[0][phases.post3] = initSurvey();
@@ -211,11 +270,20 @@ function cohcon() {
 	jglData.rot1 = [];
 	jglData.rot2 = [];
 	jglData.known = [];
+	jglData.trial = [];
+	jglData.block = [];
 
 	startPhase(task[0]);
 }
 
+var startBlockCallback = function(task, myscreen) {
+	//savePartialData();
+	//myscreen.psiTurk.saveData();
+	return [task, myscreen];
+}
+
 var endTrialCallbackPrac = function(task,myscreen) {
+	jglData.correct[jglData.correct.length-1] = stimulus.gotResp;
 	return [task,myscreen];
 }
 
@@ -232,6 +300,8 @@ var startTrialCallback = function(task, myscreen) {
 	jglData.categories.push(stimulus.categories);
 	jglData.known.push(task.thistrial.known);
 	jglData.match.push(task.thistrial.match);
+	jglData.trial.push(task.trialnum);
+	jglData.block.push(task.thistrial.block);
 	stimulus.gotResp = 0;
 
 	var flip = [1, 0];
@@ -281,9 +351,6 @@ var getResponseCallback = function(task, myscreen) {
 			stimulus.gotResp = -1;
 		}
 	}
-	// jglData.responses[jglData.responses.length-1] = resp;
-	// jglData.correct[jglData.correct.length-1] = corr;
-	// stimulus.gotResp = corr;
 	return [task, myscreen];
 }
 
@@ -305,7 +372,6 @@ var startSegmentCallback = function(task, myscreen) {
 				}
 
 			}
-			jglData.correct[jglData.correct.length-1] = jglData.gotResp;
 			break;
 	}
 
@@ -334,7 +400,7 @@ var screenUpdateCallback = function(task, myscreen) {
 			upDots(task);
 			break;
 		case segs.resp:
-			if (task.thistrial.showresp && task.trialnum < 10) {
+			if (task.thistrial.showresp && task.thistrial.block < 2) {
 				upNowRespondText();
 			}
 			upFix('#ffff00');
@@ -406,25 +472,6 @@ function updateDots(task,dots) {
 		if (dots.R[i] > dots.maxR) {
 			dots.holdx[i] = -dots.holdx[i];
 		}
-		// if (dots.R[i] < dots.minR) {
-		// 	dots.R[i] = dots.R[i] + (dots.maxR - dots.minR);
-		// }
-		// if (dots.T[i] < dots.minT) {
-		// 	dots.T[i] = dots.T[i] + (dots.maxT - dots.minT);
-		// }
-		// if (dots.T[i] > dots.maxT) {
-		// 	dots.T[i] = dots.T[i] - (dots.maxT - dots.minT);
-		// }
-		// if (dots.X[i] > dots.maxX) {
-		// 	dots.X[i] = dots.X[i] - (dots.maxX - dots.minX);
-		// } else if (dots.X[i] < dots.minX) {
-		// 	dots.X[i] = dots.X[i] + (dots.maxX - dots.minX)
-		// }
-		// if (dots.Y[i] > dots.maxY) {
-		// 	dots.Y[i] = dots.Y[i] - (dots.maxY - dots.minY);
-		// } else if (dots.Y[i] < dots.minY) {
-		// 	dots.Y[i] = dots.Y[i] + (dots.maxY - dots.minY)
-		// }
 	}
 	dots.holdx = add(dots.holdx,freq_factor);
 	dots.R = sqrt(add(multiply(dots.holdx,dots.holdx),multiply(dots.holdy,dots.holdy)));

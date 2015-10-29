@@ -1,5 +1,4 @@
-delete('~/proj/cohcon_mturk/questiondata.csv');
-delete('~/proj/cohcon_mturk/trialdata.csv');
-delete('~/proj/cohcon_mturk/eventdata.csv');
-!rm -rf ~/proj/cohcon_mturk/mat
-!rm -rf ~/proj/cohcon_mturk/xmls
+delete('~/proj/freedman_rep/questiondata.csv');
+delete('~/proj/freedman_rep/trialdata.csv');
+delete('~/proj/freedman_rep/eventdata.csv');
+!rm -rf ~/proj/freedman_rep/xmls

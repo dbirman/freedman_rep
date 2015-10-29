@@ -1,7 +1,9 @@
 function generateMat(filename)
+    disp(sprintf('Reading %s',filename));
     xDoc = xmlread(strcat('./xmls/', filename));
     xRoot = xDoc.getDocumentElement;
     xData = parseXML(xRoot);
+    disp(sprintf('Parsing %s',filename));
     clear xDoc xRoot;
     fieldNames = fields(xData);
     for i=1:length(fieldNames)
@@ -14,9 +16,10 @@ function generateMat(filename)
     clear xData i fieldNames;
     
     % reduce file sizes
-    for ti = 1:length(task{1})
-        task{1}{ti} = rmfield(task{1}{ti},'block');
-    end
+%     for ti = 1:length(task{1})
+%         task{1}{ti} = rmfield(task{1}{ti},'block');
+%     end
+    disp(sprintf('Saving %s',fileName));
     save(fileName);
 
 end

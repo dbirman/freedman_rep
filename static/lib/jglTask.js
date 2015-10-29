@@ -1657,9 +1657,9 @@ function saveAllData() {
 	xml += genXML(jglData);
 	xml += "</jglData>";
 	
-	xml += "<task>";
-	xml += genXML(task);
-	xml += "</task>";
+	// xml += "<task>";
+	// xml += genXML(task);
+	// xml += "</task>";
 	
 	xml += "<myscreen>";
 	xml += genXML(myscreen);
@@ -1683,7 +1683,38 @@ function saveAllData() {
 		error: function() {alert("error!!!");}
 	});
 	
-}/**
+}
+
+function savePartialData() {
+	var xml = "<object>";
+	
+	xml += "<jglData>";
+	xml += genXML(jglData);
+	xml += "</jglData>";
+	
+	xml += "<task>";
+	xml += genXML(task);
+	xml += "</task>";
+	
+	xml += "<myscreen>";
+	xml += genXML(myscreen);
+	xml += "</myscreen>";
+	
+	// Get all stimuli registered using initStimulus.
+	for (var i=0;i<myscreen.stimulusNames.length;i++) {
+		xml += "<" + myscreen.stimulusNames[i] + ">";
+		xml += eval("genXML(" + myscreen.stimulusNames[i] + ");");
+		xml += "</" + myscreen.stimulusNames[i] + ">";
+	}
+	
+	xml += "</object>";
+	
+	// Save data.
+	myscreen.psiTurk.recordUnstructuredData("experimentXML", xml);
+	myscreen.psiTurk.saveData();
+}
+
+/**
  * Basic Set Data Structure.
  * @constructor
  */

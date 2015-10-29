@@ -2,7 +2,7 @@
 title = Perception Experiment
 description = Discover the rule!
 amt_keywords = Perception, Rules, Decision Making, Psychology
-lifetime = 2
+lifetime = 1
 us_only = true
 approve_requirement = 95
 contact_email_on_error = gruturk@gmail.com
@@ -13,18 +13,18 @@ browser_exclude_rule = MSIE, mobile, tablet
 
 [Database Parameters]
 database_url = mysql://ggrugruturk1:bK2lzJ7tKVSG27cR@mysql-user.stanford.edu/g_gru_gruturk1 
-table_name = freedman_sdbx
+table_name = freedman_cats_live4
 
 [Server Parameters]
 host = 0.0.0.0
 port = 5001
-cutoff_time = 30
+cutoff_time = 90
 logfile = server.log
 loglevel = 2
 debug = true
 login_username = gru
 login_pw = grugrugru
-threads = 3 
+threads = 6
 
 [Task Parameters]
 experiment_code_version = 1.0
@@ -33,3 +33,4 @@ num_counters = 1
 
 [Shell Parameters]
 launch_in_sandbox_mode = true
+

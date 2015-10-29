@@ -1,6 +1,6 @@
 #!/bin/bash
 
-xmls=$(java extract < questiondata.csv)
+xmls=$(java -Xmx8000M extract < questiondata.csv)
 IFS=$'\n'
 name=0
 mkdir xmls

@@ -1,87 +1,132 @@
-%%
-files = dir('~/proj/cohcon_mturk/mat/*2015-09-03*.mat');
+%% Before this:
 
+% download_datafiles
+% run ./getData.bash
+% makeAllMats
+% matlab_behaviorMTurk -> convert to csv
+
+%% Analysis
+rmpath(genpath('~/proj/cohcon_mturk'));
+global analysis
+analysis.dir = '~/proj/freedman_rep/';
+
+%%
+append = 'cat';
+show = 1;
+%% Run
+
+names = {};
+
+files = dir(sprintf('~/proj/freedman_rep/%smat/*.mat',append));
+
+params = [];
+signals = [];
+pcorrects = [];
+pcorrectstes = [];
 for fi = 1:length(files)
-    load(fullfile('~/proj/cohcon_mturk/mat',files(fi).name));
+    load(fullfile(sprintf('~/proj/freedman_rep/%smat',append),files(fi).name));
+    csvf = fullfile(analysis.dir,sprintf('%scsv',append));
+    if ~isdir(csvf), mkdir(csvf); end
     
-    %% TODO:
-%     long = ccmt_2long(); 
-%     catlong = ccmt_catLong();
     
-    if iscell(jglData.correct)
-        jglData.corrected = [];
-        for i = 1:length(jglData.correct)
-            if strcmp(jglData.correct{i},'null')
-                jglData.corrected(i) = 0;
-            else
-                jglData.corrected(i) = jglData.correct{i};
-            end
+    wid_i = strfind(files(fi).name,':');
+    wid = files(fi).name(1:wid_i-1);
+    csvf = fullfile(csvf,sprintf('data_%s.csv',wid));
+    
+    names{end+1} = wid;
+    
+    direct = strfind(append,'dir');
+    if show
+        disp('****************************');
+        disp(sprintf('File: %s',files(fi).name));
+        disp('****************************');
+        %% print survey responses
+        
+        if isfield(jglData.postSurvey,'ruleknownDir')
+            direct = 1;
+            disp(sprintf('Knowledge of Dir Rule: %s',jglData.postSurvey.ruleDir));
+            
+            disp(sprintf('Post Explanation, did they know?: %s',jglData.postSurvey.ruleknownDir));
+            %         disp(sprintf('Knowledge of Cat Rule: %s',jglData.postSurvey.ruleCat));
+            %         disp(sprintf('Post Explanation, did they know?: %s',jglData.postSurvey.ruleknownCat));
+        else
+            disp(sprintf('Knowledge of Cat Rule: %s',jglData.postSurvey.ruleCat));
+            disp(sprintf('Post Explanation, did they know?: %s',jglData.postSurvey.ruleknownCat));
         end
-        jglData.correct = jglData.corrected;
+        disp(sprintf('Comments: %s',jglData.postSurvey.comments));
+        disp(sprintf('Were they attending? (claimed): %s',jglData.postSurvey.attention));
+        disp(sprintf('Were they fixating? (claimed): %s',jglData.postSurvey.fixation));
+        disp(sprintf('Eye jitter / tracking? %s',jglData.postSurvey.motion));
+        disp(sprintf('Screen Problems): %i',jglData.postSurvey.smoothness));
     end
-    mean(jglData.correct)
-    %%
-%     e = getTaskParameters(myscreen,task);
     
-    if isfield(jglData,'lCon')
-        figure
+    if direct > 0 
         
-        % split by task
-        crit = jglData.crit;
-        prac = jglData.prac;
-        noresp = jglData.responses==0;
-        task = jglData.task(logical(~crit.*~prac.*~noresp));
-        resp = jglData.responses(logical(~crit.*~prac.*~noresp));
-        resp = resp -1; % 0 left, 1 right
-        corr = jglData.correct(logical(~crit.*~prac.*~noresp));
+        pullfrom = 76:100;
+        % add 'diff' field
+        diff = round(360/2/pi*abs(jglData.rot2 - jglData.rot1)*1000)/1000;
+        diff = diff(pullfrom);
         
-        dCon = jglData.rCon(logical(~crit.*~prac))-jglData.lCon(logical(~crit.*~prac));
-        dCoh = jglData.rCoh(logical(~crit.*~prac))-jglData.lCoh(logical(~crit.*~prac));
-       
-        tasks = {'coherence','contrast'};
-        cond = {'coherence','contrast'};
-        colors = {'*b','*r'};
-        data = struct; stats = {};
-        for ti = 1:length(tasks)
-            subplot(2,1,ti), hold on
-            title(sprintf('Effect of Stimulus Features on Right Choice Probability for Task: %s',tasks{ti}));
-            data.(tasks{ti}).dcon = dCon(task==ti);
-            data.(tasks{ti}).dcoh = dCoh(task==ti);
-            data.(tasks{ti}).resp = resp(task==ti);
-            data.(tasks{ti}).corr = corr(task==ti);
-            
-            % now fit a sigmoid, we'll just do the basic thing first and
-            % average at each response level
-            ucon = unique(dCon);
-            ucoh = unique(dCoh);
-            bcon = [-inf, ucon(1:end-1) + diff(ucon/2), inf];
-            bcoh = [-inf, ucoh(1:end-1) + diff(ucoh/2), inf];
-            rchoice = binData(resp(task==ti),dCon(task==ti),bcon);
-            rmean = cellfun(@mean,rchoice);
-            plot(ucon,rmean,colors{2});
-            rchoice = binData(resp(task==ti),dCoh(task==ti),bcoh);
-            rmean = cellfun(@mean,rchoice);
-            plot(ucoh,rmean,colors{1});
-            
-            X = [dCoh(task==ti)',dCon(task==ti)'];
-            Y = resp(task==ti)';
-            
-            [B,dev,stats{ti}] = glmfit(X,Y,'binomial','link','logit');
-            
-            conrange = ucon(1):.01:ucon(end);
-            cohrange = ucoh(1):.01:ucoh(end);
-            y = glmval(B,[zeros(length(conrange),1),conrange'],'logit');
-            plot(conrange,y,'-r');
-            y = glmval(B,[cohrange',zeros(length(cohrange),1)],'logit');
-            plot(cohrange,y,'-b')
-            xlabel('Stim Intensity');
-            ylabel('% Right Choices');
-            
-            legend({'Contrast','Coherence'});
-            
+        binDiff = unique(diff);
+        resp = jglData.responses(pullfrom);
+        resp(resp==-1) = 0;
+        resp = 1 - resp;
+        binNM = {};
+        for i = 1:length(binDiff)
+            binNM{i} = resp(diff==binDiff(i));
         end
+        
+        sumCorr = cellfun(@sum,binNM);
+        n = cellfun(@length,binNM);
+        %             fit = fitweibull(binDiff,sumCorr,'ntotal',n,'gamma',0);
+        %
+        %             params = [params;fit.fitparams];
+        signals = [signals;binDiff];
+        pcorrects = [pcorrects;sumCorr./n];
+        %             pcorrectstes = [pcorrectstes;fit.pcorrectste];
         
     end
     
-    %%
+    %% convert everything to CSV - output
+    
+    
+    fields = {'responses','correct','direction','categories','match','rot1','rot2','known','trial','block'};
+    
+    data = zeros(length(jglData.responses),length(fields));
+    for i = 1:length(fields)
+        field = fields{i};
+        
+        data(:,i) = jglData.(fields{i});
+    end
+    
+%             csvwriteh(csvf,data,fields);
+    
 end
+
+%%
+
+for ni = 1:length(names)
+    disp(names{ni});
+end
+
+%% Testing weibull fit for dirs
+% params = params(params(:,1)>0,:);
+% params = params(params(:,1)<90,:);
+
+
+pcknown = mean(pcorrects,1);
+pcsteknown = sqrt(pcknown.*(1-pcknown)/size(pcorrects,1));
+
+%%
+figure, hold on
+errorbar(binDiff,pcstart,pcstestart,'-g');
+errorbar(binDiff,pcend,pcsteend,'-y');
+errorbar(binDiff,pcknown,pcsteknown,'-r');
+axis([0 70 0 1])
+
+% x = 0:90;
+% figure, hold on
+% plot(x,weibull(x,avgparams));
+plot([0,15,30,45,60,75],[0.05,.08,.22,.69,.9,.99],'-b');
+legend('First 25 Trials','Last 25 Trials','Informed Task','Monkeys');
+% legend('Humans','Monkeys');
