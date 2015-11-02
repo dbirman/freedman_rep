@@ -25,82 +25,85 @@ pcorrects = [];
 pcorrectstes = [];
 for fi = 1:length(files)
     load(fullfile(sprintf('~/proj/freedman_rep/%smat',append),files(fi).name));
-    csvf = fullfile(analysis.dir,sprintf('%scsv',append));
-    if ~isdir(csvf), mkdir(csvf); end
     
-    
-    wid_i = strfind(files(fi).name,':');
-    wid = files(fi).name(1:wid_i-1);
-    csvf = fullfile(csvf,sprintf('data_%s.csv',wid));
-    
-    names{end+1} = wid;
-    
-    direct = strfind(append,'dir');
-    if show
-        disp('****************************');
-        disp(sprintf('File: %s',files(fi).name));
-        disp('****************************');
-        %% print survey responses
-        
-        if isfield(jglData.postSurvey,'ruleknownDir')
-            direct = 1;
-            disp(sprintf('Knowledge of Dir Rule: %s',jglData.postSurvey.ruleDir));
-            
-            disp(sprintf('Post Explanation, did they know?: %s',jglData.postSurvey.ruleknownDir));
-            %         disp(sprintf('Knowledge of Cat Rule: %s',jglData.postSurvey.ruleCat));
-            %         disp(sprintf('Post Explanation, did they know?: %s',jglData.postSurvey.ruleknownCat));
-        else
-            disp(sprintf('Knowledge of Cat Rule: %s',jglData.postSurvey.ruleCat));
-            disp(sprintf('Post Explanation, did they know?: %s',jglData.postSurvey.ruleknownCat));
+    if length(fields(jglData.postSurvey))>1
+        csvf = fullfile(analysis.dir,sprintf('%scsv',append));
+        if ~isdir(csvf), mkdir(csvf); end
+
+
+        wid_i = strfind(files(fi).name,':');
+        wid = files(fi).name(1:wid_i-1);
+        csvf = fullfile(csvf,sprintf('data_%s.csv',wid));
+
+        names{end+1} = wid;
+
+        direct = strfind(append,'dir');
+        if show
+            disp('****************************');
+            disp(sprintf('File: %s',files(fi).name));
+            disp('****************************');
+            %% print survey responses
+
+            if isfield(jglData.postSurvey,'ruleknownDir')
+                direct = 1;
+                disp(sprintf('Knowledge of Dir Rule: %s',jglData.postSurvey.ruleDir));
+
+                disp(sprintf('Post Explanation, did they know?: %s',jglData.postSurvey.ruleknownDir));
+                %         disp(sprintf('Knowledge of Cat Rule: %s',jglData.postSurvey.ruleCat));
+                %         disp(sprintf('Post Explanation, did they know?: %s',jglData.postSurvey.ruleknownCat));
+            else
+                disp(sprintf('Knowledge of Cat Rule: %s',jglData.postSurvey.ruleCat));
+                disp(sprintf('Post Explanation, did they know?: %s',jglData.postSurvey.ruleknownCat));
+            end
+            disp(sprintf('Comments: %s',jglData.postSurvey.comments));
+            disp(sprintf('Were they attending? (claimed): %s',jglData.postSurvey.attention));
+            disp(sprintf('Were they fixating? (claimed): %s',jglData.postSurvey.fixation));
+            disp(sprintf('Eye jitter / tracking? %s',jglData.postSurvey.motion));
+            disp(sprintf('Screen Problems): %i',jglData.postSurvey.smoothness));
         end
-        disp(sprintf('Comments: %s',jglData.postSurvey.comments));
-        disp(sprintf('Were they attending? (claimed): %s',jglData.postSurvey.attention));
-        disp(sprintf('Were they fixating? (claimed): %s',jglData.postSurvey.fixation));
-        disp(sprintf('Eye jitter / tracking? %s',jglData.postSurvey.motion));
-        disp(sprintf('Screen Problems): %i',jglData.postSurvey.smoothness));
-    end
-    
-    if direct > 0 
-        
-        pullfrom = 76:100;
-        % add 'diff' field
-        diff = round(360/2/pi*abs(jglData.rot2 - jglData.rot1)*1000)/1000;
-        diff = diff(pullfrom);
-        
-        binDiff = unique(diff);
-        resp = jglData.responses(pullfrom);
-        resp(resp==-1) = 0;
-        resp = 1 - resp;
-        binNM = {};
-        for i = 1:length(binDiff)
-            binNM{i} = resp(diff==binDiff(i));
+
+        if direct > 0 
+
+            pullfrom = 76:100;
+            % add 'diff' field
+            diff = round(360/2/pi*abs(jglData.rot2 - jglData.rot1)*1000)/1000;
+            diff = diff(pullfrom);
+
+            binDiff = unique(diff);
+            resp = jglData.responses(pullfrom);
+            resp(resp==-1) = 0;
+            resp = 1 - resp;
+            binNM = {};
+            for i = 1:length(binDiff)
+                binNM{i} = resp(diff==binDiff(i));
+            end
+
+            sumCorr = cellfun(@sum,binNM);
+            n = cellfun(@length,binNM);
+            %             fit = fitweibull(binDiff,sumCorr,'ntotal',n,'gamma',0);
+            %
+            %             params = [params;fit.fitparams];
+            signals = [signals;binDiff];
+            pcorrects = [pcorrects;sumCorr./n];
+            %             pcorrectstes = [pcorrectstes;fit.pcorrectste];
+
         end
-        
-        sumCorr = cellfun(@sum,binNM);
-        n = cellfun(@length,binNM);
-        %             fit = fitweibull(binDiff,sumCorr,'ntotal',n,'gamma',0);
-        %
-        %             params = [params;fit.fitparams];
-        signals = [signals;binDiff];
-        pcorrects = [pcorrects;sumCorr./n];
-        %             pcorrectstes = [pcorrectstes;fit.pcorrectste];
-        
+
+        %% convert everything to CSV - output
+
+
+        fieldz = {'responses','correct','direction','categories','match','rot1','rot2','known','trial','block'};
+
+        data = zeros(length(jglData.responses),length(fieldz));
+        for i = 1:length(fieldz)
+            field = fieldz{i};
+
+            data(:,i) = jglData.(fieldz{i});
+        end
+
+%                 csvwriteh(csvf,data,fieldz);
+
     end
-    
-    %% convert everything to CSV - output
-    
-    
-    fields = {'responses','correct','direction','categories','match','rot1','rot2','known','trial','block'};
-    
-    data = zeros(length(jglData.responses),length(fields));
-    for i = 1:length(fields)
-        field = fields{i};
-        
-        data(:,i) = jglData.(fields{i});
-    end
-    
-%             csvwriteh(csvf,data,fields);
-    
 end
 
 %%
