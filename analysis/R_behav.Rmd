@@ -139,9 +139,13 @@ ggplot(datad, aes(diff*360/(2*pi),mu)) +
 ```
 
 ```{r}
-datac = data %>%
+datac1 = data %>%
   filter(categoriesf=='Categories',known==0,btrials>100) %>%
-  mutate(rot1d = rot1 * 360/(2*pi)) %>%
+  mutate(rot1d = rot1 * 360/(2*pi))
+dataw = datac1 %>%
+  group_by(rot1d,wid) %>%
+  summarise(mu=mean(correct))
+datac = datac1 %>%
   group_by(rot1d) %>%
   summarise(n=n(),mu=mean(correct)) %>%
   mutate(se= 1*sqrt(mu*(1-mu)/n))
@@ -155,9 +159,10 @@ ss = 1
 datac = cbind(datac,col=c(rep(1,ss),rep(1,ss),rep(1,ss),rep(1,ss),
                             rep(0,ss),rep(0,ss),rep(0,ss),rep(0,ss)))
 
-ggplot(datac, aes(rot1d,mu,ymin=mu-se,ymax=mu+se,fill=factor(col))) +
-  geom_bar(stat='identity') +
-  geom_errorbar(width=0) +
+ggplot() +
+  geom_bar(data=datac, aes(rot1d,mu,ymin=mu-se,ymax=mu+se,fill=factor(col)),stat='identity') +
+  geom_errorbar(data=datac, aes(rot1d,mu,ymin=mu-se,ymax=mu+se,fill=factor(col)),width=0) +
+  geom_point(data=dataw,aes(rot1d,mu)) +
   scale_y_continuous(breaks=c(0.5,1),limits=c(-.05,1.05)) +
   scale_fill_brewer(palette='Paired') +
   geom_vline(aes(xintercept=c(22.5,360-(180-22.5)),color='black')) +
@@ -170,9 +175,14 @@ ggsave(filename='~/proj/freedman_rep/analysis/figures/cat_unknown.pdf')
 
 
 ```{r}
-datac = data %>%
+datac1 = data %>%
   filter(categoriesf=='Categories',known==1) %>%
-  mutate(rot1d = rot1 * 360/(2*pi)) %>%
+  mutate(rot1d = rot1 * 360/(2*pi))
+
+dataw = datac1 %>%
+  group_by(rot1d,wid) %>%
+  summarise(mu=mean(correct))
+datac = datac1 %>%
   group_by(rot1d) %>%
   summarise(n=n(),mu=mean(correct)) %>%
   mutate(se= 1*sqrt(mu*(1-mu)/n))
@@ -186,11 +196,12 @@ ss = 1
 datac = cbind(datac,col=c(rep(1,ss),rep(1,ss),rep(1,ss),rep(1,ss),
                             rep(0,ss),rep(0,ss),rep(0,ss),rep(0,ss)))
 
-ggplot(datac, aes(rot1d,mu,ymin=mu-se,ymax=mu+se,fill=factor(col))) +
-  geom_bar(stat='identity') +
-  geom_errorbar(width=0) +
-  scale_y_continuous(breaks=c(0.5,1),limits=c(-.05,1.05)) +
+ggplot() +
+  geom_rect(data=datac, aes(xmin=rot1d-20,xmax=rot1d+20,ymax=mu,ymin=0.5,fill=factor(col)),stat='identity') +
+  geom_errorbar(data=datac, aes(rot1d,mu,ymin=mu-se,ymax=mu+se,fill=factor(col)),width=0) +
+  scale_y_continuous(breaks=c(0.5,1),limits=c(.45,1.05)) +
   scale_fill_brewer(palette='Paired') +
+  geom_point(data=dataw,aes(rot1d,mu),position=position_jitter(width=0.05,height=0.01)) +
   geom_vline(aes(xintercept=c(22.5,360-(180-22.5)),color='black')) +
   theme_bw() +
   xlab('Sample Direction (deg)') +
