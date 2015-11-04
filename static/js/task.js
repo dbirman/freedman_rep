@@ -333,15 +333,19 @@ var startTrialCallback = function(task, myscreen) {
 			} else {
 				stimulus.num2 = randomElement(stimulus.categoryGroups[flip[task.thistrial.direction]]);
 			}
-			// we picked two numbers, check to see if they are in the available indexes we haven't succeded at
-			failInds = find(lessThan(jglData.dirC,jglData.corrLimit));
-			var curInd = rot2ind(stimulus.num1,stimulus.num2);
-			for (var i in failInds) {
-				val = failInds[i];
-				if (curInd==val) {
-					repick = false; // we found our index in the avail, no repick needed
-					break
+			if (jglData.correct.length < 224) {
+				// we picked two numbers, check to see if they are in the available indexes we haven't succeded at
+				failInds = find(lessThan(jglData.dirC,jglData.corrLimit));
+				var curInd = rot2ind(stimulus.num1,stimulus.num2);
+				for (var i in failInds) {
+					val = failInds[i];
+					if (curInd==val) {
+						repick = false; // we found our index in the avail, no repick needed
+						break
+					}
 				}
+			} else {
+				repick = false;
 			}
 		} else {
 			stimulus.num1 = task.thistrial.direction;

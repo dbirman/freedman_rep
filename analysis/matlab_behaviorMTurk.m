@@ -11,7 +11,7 @@ global analysis
 analysis.dir = '~/proj/freedman_rep/';
 
 %%
-append = 'cat';
+append = '';
 show = 1;
 %% Run
 
@@ -101,7 +101,7 @@ for fi = 1:length(files)
             data(:,i) = jglData.(fieldz{i});
         end
 
-%                 csvwriteh(csvf,data,fieldz);
+        csvwriteh(csvf,data,fieldz);
 
     end
 end
