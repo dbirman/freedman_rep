@@ -12,25 +12,36 @@ library(lme4)
 
 
 ```{r}
-files = dir('~/proj/freedman_rep/dircsv/')
+files = dir('C:\\Users\\Dan\\proj\\freedman_rep\\dircsv\\')
 
 adata_dir = data.frame();
 for (fi in 1:length(files)) {
   fname = files[fi]
-  data = read.csv(paste('~/proj/freedman_rep/dircsv/',fname,sep=''))
+  data = read.csv(paste('C:\\Users\\Dan\\proj\\freedman_rep\\dircsv\\',fname,sep=''))
   data = data %>%
     mutate(wid=fi)
   adata_dir = rbind(adata_dir,data)
 }
-files = dir('~/proj/freedman_rep/catcsv/')
+files = dir('C:\\Users\\Dan\\proj\\freedman_rep\\catcsv\\')
 
 adata_cat = data.frame();
 for (fi in 1:length(files)) {
   fname = files[fi]
-  data = read.csv(paste('~/proj/freedman_rep/catcsv/',fname,sep=''))
+  data = read.csv(paste('C:\\Users\\Dan\\proj\\freedman_rep\\catcsv\\',fname,sep=''))
   data = data %>%
     mutate(wid=fi)
   adata_cat = rbind(adata_cat,data)
+}
+
+files = dir('C:\\Users\\Dan\\proj\\freedman_rep\\longcsv\\')
+
+adata_long = data.frame();
+for (fi in 1:length(files)) {
+  fname = files[fi]
+  data = read.csv(paste('C:\\Users\\Dan\\proj\\freedman_rep\\longcsv\\',fname,sep=''))
+  data = data %>%
+    mutate(wid=fi)
+  adata_long = rbind(adata_long,data)
 }
 ```
 
@@ -38,35 +49,48 @@ for (fi in 1:length(files)) {
 ```
 
 ```{r}
-data = adata_cat
+fixHeaders = function(data) {  
+  data$correct[data$correct==-1] = 0
+  data = data %>%
+    mutate(catbig = categories)
+  data$catbig[data$catbig==1] = 2
+  data = data %>%
+    mutate(categoriesf = factor(categories,levels=c(0,1),labels=c('Directions','Categories')),
+           knownf = factor(known,levels=c(0,1),labels=c('Discovered','Known')),
+           matchf = factor(match,levels=c(0,1),labels=c('Unmatched','Matched')),
+           correctf = factor(correct,levels=c(0,1),labels=c('Wrong','Correct')),
+           catknown = factor(catbig+known,levels=c(0,1,2,3),labels=c('Directions','Directions Known','Categories','Categories Known')),
+           btrials = trial+block*max(trial))
+  
+  return(data)
+}
+```
+
+
+```{r}
+adata_long = fixHeaders(adata_long)
+adata_cat = fixHeaders(adata_cat)
+adata_dir = fixHeaders(adata_dir)
+
+adata_long$wid = adata_long$wid + max(adata_cat$wid)
+
+cdata = rbind(adata_cat,adata_long)
 
 ## Remove everybody who showed no performance in known condition
 
-data$correct[data$correct==-1] = 0;
-data = data %>%
-  mutate(catbig = categories)
-data$catbig[data$catbig==1] = 2
-data = data %>%
-  mutate(categoriesf = factor(categories,levels=c(0,1),labels=c('Directions','Categories')),
-         knownf = factor(known,levels=c(0,1),labels=c('Discovered','Known')),
-         matchf = factor(match,levels=c(0,1),labels=c('Unmatched','Matched')),
-         correctf = factor(correct,levels=c(0,1),labels=c('Wrong','Correct')),
-         catknown = factor(catbig+known,levels=c(0,1,2,3),labels=c('Directions','Directions Known','Categories','Categories Known')),
-         btrials = trial+block*max(trial))
-data$corr[data$responses==1] = data$match[data$responses==1];
-data$corr[data$responses==-1] = !as.logical(data$match[data$responses==-1]);
 ```
 
 ```{r}
+data = cdata
 length(unique(data$wid))
 knownperf = data %>%
   filter(known==1) %>%
   group_by(wid) %>%
-  summarise(mu=mean(corr))
+  summarise(mu=mean(correct))
 
 widlist = c()
 for (i in unique(knownperf$wid)) {
-  if (knownperf$mu[i]<.7) {
+  if (knownperf$mu[i]<.8) {
     widlist = c(widlist,i)
   }
 }
@@ -90,40 +114,43 @@ rs = glmer(corr~btrials*catknown+(btrials*catknown|wid),family='binomial',data=d
 plot(allEffects(rs))
 ```
 
+```{r}
+
+data_unk = data %>%
+  filter(catknown=='Categories')
+```
+
+
 
 ```{r}
-data %>%
-ggplot(data=., aes(btrials,corr, color=catknown)) + 
-  geom_point(size=3,position=position_jitter(width=.05,height=.05)) +
-  geom_smooth(method="glm",family='binomial',size=2,se=F) +
-  scale_y_continuous(breaks=c(0,.5,1),limits=c(-0.1,1.1)) +
-  scale_color_brewer(palette='Dark2') +
+data_loc = data_unk %>%
+  filter(wid %in% c(63,59,56))
+ggplot() + 
+  #geom_smooth(data=data_unk, aes(btrials,correct),method="glm",family='binomial',size=2,se=F) +
+  geom_line(data=data_unk, aes(btrials,correct, group=wid),
+            stat="smooth",
+            method = "glm",
+            family='binomial',
+            fullrange=F,
+            size = 0.5,
+            alpha = 0.1) +
+  geom_smooth(data=data_loc, aes(btrials,correct, group=wid),
+              method="glm",family="binomial",size=2,color="black",se=F,
+              fullrange=F) +
+  scale_y_continuous(breaks=c(.5,.75,1),limits=c(0,1.1)) +
   theme_bw() +
-  facet_grid(.~wid) +
   ylab('Performance Correct (%)') +
-  xlab('Trial #')
+  xlab('Trial #') +
+  coord_cartesian(ylim=c(.45,1.05)) +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
 ```
 
 ```{r}
-```
-
-
-
-```{r}
-data_blocked = data %>%
-  group_by(categoriesf,knownf,block) %>%
-  summarise(n=n(),mean_corr = mean(corr))
-
-#ggplot(data=data_blocked, aes(block,mean_corr, color=categoriesf, fill=knownf, linetype = knownf)) + geom_smooth(method="lm") +geom_point(size=3)
-
-
-ggplot(data=data, aes(block,corr, color=categoriesf, linetype = knownf)) + 
-  geom_smooth(method="glm",family='binomial',size=2) +
-  geom_point(size=3,position=position_jitter(width=.05,height=.05)) +
-  scale_y_continuous(breaks=c(0,.5,1),limits=c(-0.1,1.1)) +
-  scale_color_brewer(palette='Dark2') +
-  facet_grid(.~wid) +
-  theme_bw()
+mc = data %>%
+  filter(wid>47) %>%
+  group_by(wid) %>%
+  summarise(mu=mean(correct)) %>%
+  arrange(desc(mu))
 ```
 
 ```{r}
