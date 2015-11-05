@@ -12,33 +12,33 @@ library(lme4)
 
 
 ```{r}
-files = dir('C:\\Users\\Dan\\proj\\freedman_rep\\dircsv\\')
+files = dir('~/proj/freedman_rep/dircsv/')
 
 adata_dir = data.frame();
 for (fi in 1:length(files)) {
   fname = files[fi]
-  data = read.csv(paste('C:\\Users\\Dan\\proj\\freedman_rep\\dircsv\\',fname,sep=''))
+  data = read.csv(paste('~/proj/freedman_rep/dircsv/',fname,sep=''))
   data = data %>%
     mutate(wid=fi)
   adata_dir = rbind(adata_dir,data)
 }
-files = dir('C:\\Users\\Dan\\proj\\freedman_rep\\catcsv\\')
+files = dir('~/proj/freedman_rep/catcsv/')
 
 adata_cat = data.frame();
 for (fi in 1:length(files)) {
   fname = files[fi]
-  data = read.csv(paste('C:\\Users\\Dan\\proj\\freedman_rep\\catcsv\\',fname,sep=''))
+  data = read.csv(paste('~/proj/freedman_rep/catcsv/',fname,sep=''))
   data = data %>%
     mutate(wid=fi)
   adata_cat = rbind(adata_cat,data)
 }
 
-files = dir('C:\\Users\\Dan\\proj\\freedman_rep\\longcsv\\')
+files = dir('~/proj/freedman_rep/longcsv/')
 
 adata_long = data.frame();
 for (fi in 1:length(files)) {
   fname = files[fi]
-  data = read.csv(paste('C:\\Users\\Dan\\proj\\freedman_rep\\longcsv\\',fname,sep=''))
+  data = read.csv(paste('~/proj/freedman_rep/longcsv/',fname,sep=''))
   data = data %>%
     mutate(wid=fi)
   adata_long = rbind(adata_long,data)
@@ -75,6 +75,7 @@ adata_dir = fixHeaders(adata_dir)
 adata_long$wid = adata_long$wid + max(adata_cat$wid)
 
 cdata = rbind(adata_cat,adata_long)
+cdata$widf = factor(cdata$wid)
 
 ## Remove everybody who showed no performance in known condition
 
@@ -117,7 +118,7 @@ plot(allEffects(rs))
 ```{r}
 
 data_unk = data %>%
-  filter(catknown=='Categories')
+  filter(catknown=='Categories',btrials<=150)
 ```
 
 
@@ -130,7 +131,8 @@ ggplot() +
   geom_line(data=data_unk, aes(btrials,correct, group=wid),
             stat="smooth",
             method = "glm",
-            family='binomial',
+            family="binomial",
+            span=1,
             fullrange=F,
             size = 0.5,
             alpha = 0.1) +
@@ -141,7 +143,7 @@ ggplot() +
   theme_bw() +
   ylab('Performance Correct (%)') +
   xlab('Trial #') +
-  coord_cartesian(ylim=c(.45,1.05)) +
+  coord_cartesian(ylim=c(.3,1.05),xlim=c(-5,155)) +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
 ```
 

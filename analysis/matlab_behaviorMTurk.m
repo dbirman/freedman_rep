@@ -11,7 +11,7 @@ global analysis
 analysis.dir = '~/proj/freedman_rep/';
 
 %%
-append = '';
+append = 'long';
 show = 1;
 %% Run
 
@@ -42,6 +42,7 @@ for fi = 1:length(files)
             disp('****************************');
             disp(sprintf('File: %s',files(fi).name));
             disp('****************************');
+            disp(sprintf('WID: %i',47+fi));
             %% print survey responses
 
             if isfield(jglData.postSurvey,'ruleknownDir')
