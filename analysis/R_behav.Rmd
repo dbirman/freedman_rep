@@ -91,7 +91,7 @@ knownperf = data %>%
 
 widlist = c()
 for (i in unique(knownperf$wid)) {
-  if (knownperf$mu[i]<.8) {
+  if (knownperf$mu[i]<.7) {
     widlist = c(widlist,i)
   }
 }
@@ -125,7 +125,7 @@ data_unk = data %>%
 
 ```{r}
 data_loc = data_unk %>%
-  filter(wid %in% c(63,5))
+  filter(wid %in% c(63,45,5,31))
 ggplot() + 
   #geom_smooth(data=data_unk, aes(btrials,correct),method="glm",family='binomial',size=2,se=F) +
   geom_line(data=data_unk, aes(btrials,correct, group=wid),

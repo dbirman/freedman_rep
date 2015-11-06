@@ -24,6 +24,8 @@ signals = {[],[],[],[]};
 pcorrects = {[],[],[],[]};
 pullfroms = {1:25,26:50,51:75,75:100};
 pcorrectstes = [];
+ruleDir = {};
+ruleCat = {};
 for fi = 1:length(files)
     load(fullfile(sprintf('~/proj/freedman_rep/%smat',append),files(fi).name));
     
@@ -86,14 +88,14 @@ for fi = 1:length(files)
         %% convert everything to CSV - output
 
 
-        fieldz = {'responses','correct','direction','categories','match','rot1','rot2','known','trial','block'};
-
-        data = zeros(length(jglData.responses),length(fieldz));
-        for i = 1:length(fieldz)
-            field = fieldz{i};
-
-            data(:,i) = jglData.(fieldz{i});
-        end
+%         fieldz = {'responses','correct','direction','categories','match','rot1','rot2','known','trial','block'};
+% 
+%         data = zeros(length(jglData.responses),length(fieldz));
+%         for i = 1:length(fieldz)
+%             field = fieldz{i};
+% 
+%             data(:,i) = jglData.(fieldz{i});
+%         end
 
 %         csvwriteh(csvf,data,fieldz);
 
