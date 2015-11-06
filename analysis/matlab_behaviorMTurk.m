@@ -11,8 +11,8 @@ global analysis
 analysis.dir = '~/proj/freedman_rep/';
 
 %%
-append = 'long';
-show = 1;
+append = 'dir';
+show = 0;
 %% Run
 
 names = {};
@@ -20,8 +20,9 @@ names = {};
 files = dir(sprintf('~/proj/freedman_rep/%smat/*.mat',append));
 
 params = [];
-signals = [];
-pcorrects = [];
+signals = {[],[],[],[]};
+pcorrects = {[],[],[],[]};
+pullfroms = {1:25,26:50,51:75,75:100};
 pcorrectstes = [];
 for fi = 1:length(files)
     load(fullfile(sprintf('~/proj/freedman_rep/%smat',append),files(fi).name));
@@ -42,7 +43,11 @@ for fi = 1:length(files)
             disp('****************************');
             disp(sprintf('File: %s',files(fi).name));
             disp('****************************');
-            disp(sprintf('WID: %i',47+fi));
+            if strcmp(append,'cat')
+                disp(sprintf('WID: %i',fi));
+            else
+                disp(sprintf('WID: %i',47+fi));
+            end
             %% print survey responses
 
             if isfield(jglData.postSurvey,'ruleknownDir')
@@ -65,27 +70,15 @@ for fi = 1:length(files)
 
         if direct > 0 
 
-            pullfrom = 76:100;
-            % add 'diff' field
-            diff = round(360/2/pi*abs(jglData.rot2 - jglData.rot1)*1000)/1000;
-            diff = diff(pullfrom);
-
-            binDiff = unique(diff);
-            resp = jglData.responses(pullfrom);
-            resp(resp==-1) = 0;
-            resp = 1 - resp;
-            binNM = {};
-            for i = 1:length(binDiff)
-                binNM{i} = resp(diff==binDiff(i));
+            for pi = 1:length(pullfroms)
+                pullfrom = pullfroms{pi};
+                sig = signals{pi};
+                pcorr = pcorrects{pi};
+                [signals{pi}, pcorrects{pi}] = pullAndBin(pullfrom,jglData,sig,pcorr);
             end
 
-            sumCorr = cellfun(@sum,binNM);
-            n = cellfun(@length,binNM);
-            %             fit = fitweibull(binDiff,sumCorr,'ntotal',n,'gamma',0);
-            %
-            %             params = [params;fit.fitparams];
-            signals = [signals;binDiff];
-            pcorrects = [pcorrects;sumCorr./n];
+                % add 'diff' field
+            
             %             pcorrectstes = [pcorrectstes;fit.pcorrectste];
 
         end
@@ -102,7 +95,7 @@ for fi = 1:length(files)
             data(:,i) = jglData.(fieldz{i});
         end
 
-        csvwriteh(csvf,data,fieldz);
+%         csvwriteh(csvf,data,fieldz);
 
     end
 end
@@ -113,24 +106,37 @@ for ni = 1:length(names)
     disp(names{ni});
 end
 
-%% Testing weibull fit for dirs
-% params = params(params(:,1)>0,:);
-% params = params(params(:,1)<90,:);
-
-
-pcknown = mean(pcorrects,1);
-pcsteknown = sqrt(pcknown.*(1-pcknown)/size(pcorrects,1));
-
 %%
-figure, hold on
-errorbar(binDiff,pcstart,pcstestart,'-g');
-errorbar(binDiff,pcend,pcsteend,'-y');
-errorbar(binDiff,pcknown,pcsteknown,'-r');
-axis([0 70 0 1])
+  fsigm = @(param,xval) param(1)+(param(2)-param(1))./(1+10.^((param(3)-xval)*param(4)))
 
+X = [repmat(pf(1),45,1);repmat(pf(2),45,1);repmat(pf(3),45,1);repmat(pf(4),45,1)];
+est_params = sigm_fit(X,pcorrects{piG}(:));
+%% Testing weibull fit for dirs
+
+pi=3.1415927;
+adiffs = round(360/2/pi*abs(jglData.rot2 - jglData.rot1)*1000)/1000;
+pf = unique(adiffs);
+piG = 3; % which pullfrom group
+
+pc = mean(pcorrects{piG},1);
+pcste = sqrt(pc.*(1-pc)/size(pcorrects{piG},1));
+
+figure
+errorbar(pf,pc,pcste,'-g');
+hold on
+% plot(0:100,fsigm(est_params,0:100))
+
+pcs = pcorrects{piG};
+for si = 1:size(pcs,1)
+    p = plot(pf,pcs(si,:),'-k');
+%     alpha(p,.1)
+end
 % x = 0:90;
 % figure, hold on
 % plot(x,weibull(x,avgparams));
 plot([0,15,30,45,60,75],[0.05,.08,.22,.69,.9,.99],'-b');
-legend('First 25 Trials','Last 25 Trials','Informed Task','Monkeys');
+hold off
+fullleg = {'First 25 Trials','25-50 Trials','50-75 Trials','Informed Task','Monkeys'};
+legend(fullleg([piG 5]));
 % legend('Humans','Monkeys');
+axis([-5 80 -.05 1.05])
