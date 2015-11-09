@@ -37,12 +37,14 @@ Images and JS files for experiment script.
 You will need psiturk installed, see http://psiturk.org/
 To launch the experiment run the following commands (MAC OS X):
 
+```
 cd ~
 git clone httpL//github.com/dbirman/freedman_rep
 cd freedman_rep
 psiturk
 server on
 debug
+```
 
 By default it launches the categorization task. Change taskDir = 1 in task.js to get the directions task.
 psiturk
