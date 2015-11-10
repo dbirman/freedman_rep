@@ -17,7 +17,7 @@ show = 0;
 
 names = {};
 
-files = dir(sprintf('~/proj/freedman_rep/%smat/*.mat',append));
+files = dir(sprintf('~/proj/freedman_rep/data/%smat/*.mat',append));
 
 params = [];
 signals = {[],[],[],[]};
@@ -27,7 +27,7 @@ pcorrectstes = [];
 ruleDir = {};
 ruleCat = {};
 for fi = 1:length(files)
-    load(fullfile(sprintf('~/proj/freedman_rep/%smat',append),files(fi).name));
+    load(fullfile(sprintf('~/proj/freedman_rep/data/%smat',append),files(fi).name));
     
     if length(fields(jglData.postSurvey))>1
         csvf = fullfile(analysis.dir,sprintf('%scsv',append));

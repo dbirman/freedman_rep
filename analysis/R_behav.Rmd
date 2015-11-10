@@ -12,33 +12,33 @@ library(lme4)
 
 
 ```{r}
-files = dir('~/proj/freedman_rep/dircsv/')
+files = dir('~/proj/freedman_rep/data/dircsv/')
 
 adata_dir = data.frame();
 for (fi in 1:length(files)) {
   fname = files[fi]
-  data = read.csv(paste('~/proj/freedman_rep/dircsv/',fname,sep=''))
+  data = read.csv(paste('~/proj/freedman_rep/data/dircsv/',fname,sep=''))
   data = data %>%
     mutate(wid=fi)
   adata_dir = rbind(adata_dir,data)
 }
-files = dir('~/proj/freedman_rep/catcsv/')
+files = dir('~/proj/freedman_rep/data/catcsv/')
 
 adata_cat = data.frame();
 for (fi in 1:length(files)) {
   fname = files[fi]
-  data = read.csv(paste('~/proj/freedman_rep/catcsv/',fname,sep=''))
+  data = read.csv(paste('~/proj/freedman_rep/data/catcsv/',fname,sep=''))
   data = data %>%
     mutate(wid=fi)
   adata_cat = rbind(adata_cat,data)
 }
 
-files = dir('~/proj/freedman_rep/longcsv/')
+files = dir('~/proj/freedman_rep/data/longcsv/')
 
 adata_long = data.frame();
 for (fi in 1:length(files)) {
   fname = files[fi]
-  data = read.csv(paste('~/proj/freedman_rep/longcsv/',fname,sep=''))
+  data = read.csv(paste('~/proj/freedman_rep/data/longcsv/',fname,sep=''))
   data = data %>%
     mutate(wid=fi)
   adata_long = rbind(adata_long,data)
@@ -82,7 +82,7 @@ cdata$widf = factor(cdata$wid)
 ```
 
 ```{r}
-data = cdata
+data = adata_long
 length(unique(data$wid))
 knownperf = data %>%
   filter(known==1) %>%
@@ -111,7 +111,8 @@ counts = data %>%
 ```
 
 ```{r}
-rs = glmer(corr~btrials*catknown+(btrials*catknown|wid),family='binomial',data=data)
+data$widf = factor(data$wid)
+rs = glm(correct~btrials,family='binomial',data=data)
 plot(allEffects(rs))
 ```
 
