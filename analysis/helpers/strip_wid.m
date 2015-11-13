@@ -50,3 +50,37 @@ for fi = 1:length(files)
 
     count = count + 1;
 end
+
+%% others
+
+top = '~/proj/freedman_rep/data/catmat/';
+
+files = dir(fullfile(top,'*mat'));
+
+for fi = 1:length(files)
+    load(fullfile(top,files(fi).name));
+    myscreen.uniqueId = count;
+    myscreen.workerID = count;
+    myscreen.assignmentID = 'REMOVED';
+    
+    save(fullfile(top,sprintf('%i.mat',count)),'myscreen','jglData','stimulus');
+    delete(fullfile(top,files(fi).name));
+
+    count = count + 1;
+end
+
+top = '~/proj/freedman_rep/data/longmat/';
+
+files = dir(fullfile(top,'*mat'));
+
+for fi = 1:length(files)
+    load(fullfile(top,files(fi).name));
+    myscreen.uniqueId = count;
+    myscreen.workerID = count;
+    myscreen.assignmentID = 'REMOVED';
+    
+    save(fullfile(top,sprintf('%i.mat',count)),'myscreen','jglData','stimulus');
+    delete(fullfile(top,files(fi).name));
+
+    count = count + 1;
+end

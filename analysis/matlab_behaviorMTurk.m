@@ -137,6 +137,11 @@ dresp = 1-dresp;
 
 fit = fitsigmoid(ddiff,dresp,[0 0 0 0],[1 1 1 1]);
 
+plot(fit.fitx*360,fit.fity);
+
+v = find(fit.fity>=.75,1);
+fit.fitx(v)*360
+
 %% Testing weibull fit for dirs
 
 pi=3.1415927;
