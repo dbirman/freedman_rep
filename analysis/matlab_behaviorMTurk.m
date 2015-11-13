@@ -26,6 +26,7 @@ pullfroms = {1:25,26:50,51:75,75:100};
 pcorrectstes = [];
 ruleDir = {};
 ruleCat = {};
+adata = [];
 for fi = 1:length(files)
     load(fullfile(sprintf('~/proj/freedman_rep/data/%smat',append),files(fi).name));
     
@@ -45,10 +46,12 @@ for fi = 1:length(files)
             disp('****************************');
             disp(sprintf('File: %s',files(fi).name));
             disp('****************************');
-            if strcmp(append,'cat')
+            if strcmp(append,'dir')
                 disp(sprintf('WID: %i',fi));
+            elseif strcmp(append,'cat')
+                disp(sprintf('WID: %i',45+fi));
             else
-                disp(sprintf('WID: %i',47+fi));
+                disp(sprintf('WID: %i',47+47+fi));
             end
             %% print survey responses
 
@@ -88,14 +91,15 @@ for fi = 1:length(files)
         %% convert everything to CSV - output
 
 
-%         fieldz = {'responses','correct','direction','categories','match','rot1','rot2','known','trial','block'};
-% 
-%         data = zeros(length(jglData.responses),length(fieldz));
-%         for i = 1:length(fieldz)
-%             field = fieldz{i};
-% 
-%             data(:,i) = jglData.(fieldz{i});
-%         end
+        fieldz = {'responses','correct','direction','categories','match','rot1','rot2','known','trial','block'};
+
+        data = zeros(length(jglData.responses),length(fieldz));
+        for i = 1:length(fieldz)
+            field = fieldz{i};
+
+            data(:,i) = jglData.(fieldz{i});
+        end
+        adata = [adata;data];
 
 %         csvwriteh(csvf,data,fieldz);
 
@@ -113,6 +117,26 @@ end
 
 X = [repmat(pf(1),45,1);repmat(pf(2),45,1);repmat(pf(3),45,1);repmat(pf(4),45,1)];
 est_params = sigm_fit(X,pcorrects{piG}(:));
+
+%% Count how many of pcs are perfect
+count = 0;
+for i = 1:size(pcs,1)
+    if pcs(i,1)==0 && pcs(i,2)==1
+        count = count + 1;
+    end
+end
+
+%% Compute sigmoid fit
+adata = adata(adata(:,8)==0,:);    
+adata = adata(adata(:,10)>1,:);
+ ddiff = adata(:,6)-adata(:,7);
+ddiff = abs(ddiff)/2/pi;
+dresp = adata(:,1);
+dresp(dresp==-1)=0;
+dresp = 1-dresp;
+
+fit = fitsigmoid(ddiff,dresp,[0 0 0 0],[1 1 1 1]);
+
 %% Testing weibull fit for dirs
 
 pi=3.1415927;
@@ -127,7 +151,7 @@ figure
 errorbar(pf,pc,pcste,'-g');
 hold on
 % plot(0:100,fsigm(est_params,0:100))
-
+plot(fit.fitx*360,fit.fity,'-y')
 pcs = pcorrects{piG};
 for si = 1:size(pcs,1)
     p = plot(pf,pcs(si,:),'-k');

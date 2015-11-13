@@ -71,8 +71,8 @@ fixHeaders = function(data) {
 adata_long = fixHeaders(adata_long)
 adata_cat = fixHeaders(adata_cat)
 adata_dir = fixHeaders(adata_dir)
-
-adata_long$wid = adata_long$wid + max(adata_cat$wid)
+adata_long$wid = adata_long$wid + max(adata_cat$wid) + max(adata_dir$wid)
+adata_cat$wid = adata_cat$wid + max(adata_dir$wid)
 
 cdata = rbind(adata_cat,adata_long)
 cdata$widf = factor(cdata$wid)
@@ -258,4 +258,71 @@ ggplot(pd, aes(angle,perf,fill=factor(col))) +
 ggsave(filename='~/proj/freedman_rep/analysis/figures/cat_paper.pdf')
 ```
 
+
+```{r}
+## Compute the performance average across subjects at the end of each learning session, and during the known condition, then plot
+
+#adata_long
+#adata_cat
+#adata_dir
+
+longperf = adata_long %>%
+  filter(btrials>250) %>%
+  group_by(wid) %>%
+  summarise(mu=mean(correct))
+longperfK = adata_long %>%
+  filter(known==1) %>%
+  group_by(wid) %>%
+  summarise(mu=mean(correct))
+catperf = adata_cat %>%
+  filter(btrials>125) %>%
+  group_by(wid) %>%
+  summarise(mu=mean(correct))
+catperfK = adata_cat %>%
+  filter(known==1) %>%
+  group_by(wid) %>%
+  summarise(mu=mean(correct))
+dirperf = adata_dir %>%
+  filter(btrials>50) %>%
+  group_by(wid) %>%
+  summarise(mu=mean(correct))
+dirperfK = adata_dir %>%
+  filter(known==1) %>%
+  group_by(wid) %>%
+  summarise(mu=mean(correct))
+longperf = cbind(longperf,group="Category: Long",known="Learning")
+dirperf = cbind(dirperf,group="Direction",known="Learning")
+catperf = cbind(catperf,group="Category: Short",known="Learning")
+longperfK = cbind(longperfK,group="Category: Long",known="Known")
+dirperfK = cbind(dirperfK,group="Direction",known="Known")
+catperfK = cbind(catperfK,group="Category: Short",known="Known")
+
+allperf = rbind(dirperf,dirperfK,catperf,catperfK,longperf,longperfK)
+allperfs = allperf %>%
+  group_by(group,known) %>%
+  summarise(sd=sd(mu)/sqrt(n()),mu=mean(mu))
+
+```
+
+```{r}
+
+ggplot() + 
+  geom_bar(data=allperfs, aes(x=group,ymin=0.5,y=mu,fill=known),
+           position="dodge",stat="identity") +
+  geom_errorbar(data=allperfs,aes(group,mu,ymin=mu-1.96*sd,ymax=mu+1.96*sd,fill=known),
+           position="dodge",stat="identity") +
+  theme_bw()
+```
+
+```{r}
+ggplot(data=allperf, ) +
+  geom_point(aes(x=group,y=mu,ymax=mu,group=known,color=known),position="dodge")
+```
+
+```{r}
+# analysis of Fig 2 data
+contrasts(allperf$group) = cbind(c(-2,1,1),c(0,-1,1))
+rs = lm(data=allperf, mu ~ known*group)
+summary(rs)
+```
 
