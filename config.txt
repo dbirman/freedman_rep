@@ -12,8 +12,8 @@ organization_name = Stanford University
 browser_exclude_rule = MSIE, mobile, tablet
 
 [Database Parameters]
-database_url = mysql://ggrugruturk1:bK2lzJ7tKVSG27cR@mysql-user.stanford.edu/g_gru_gruturk1 
-table_name = freedman_cats_long2
+database_url = sqlite:///participants.db
+table_name = test
 
 [Server Parameters]
 host = 0.0.0.0
