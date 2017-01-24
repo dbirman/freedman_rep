@@ -24,7 +24,7 @@ function cohcon() {
 	// delay = 1013 ms
 	// test = 667 ms
 
-	var taskDir = 2; // 1 = directions, 2 = categories
+	var taskDir = 1; // 1 = directions, 2 = categories
 
 	var phases = {};
 	phases.survey1 = 0;
@@ -505,53 +505,4 @@ function upDots(task,elapsed) {
 	stimulus.dots = updateDots(task,stimulus.dots,elapsed);
 
 	jglPoints2(stimulus.dots.x, stimulus.dots.y, 0.2, '#ffffff');
-}
-
-function updateDots(task,dots,elapsed) {
-
-	// Check frequency? Not sure how to do this...
-	freq_factor = 12*elapsed;
-
-	// dots.x = add(dots.y,);
-
-	// Flip dots back if they go too far
-	for (var i=0;i<dots.R.length;i++) {
-		if (dots.R[i] > dots.maxR && dots.holdx[i] > 0) {
-			dots.holdx[i] = -dots.holdx[i];
-		}
-	}
-	dots.holdx = add(dots.holdx,freq_factor);
-	dots.R = sqrt(add(multiply(dots.holdx,dots.holdx),multiply(dots.holdy,dots.holdy)));
-	dots.T = mod(add(atan2(dots.holdy,dots.holdx),Math.PI*2),Math.PI*2);
-
-	// Update x, y
-
-	dots.holdx =  multiply(dots.R,cos(mod(dots.T, Math.PI*2)));
-	dots.holdy = multiply(dots.R,sin(mod(dots.T, Math.PI*2)));
-
-	dots.x = multiply(dots.R,cos(mod(add(dots.T, stimulus.rot), Math.PI*2)));
-	dots.y = multiply(dots.R,sin(mod(add(dots.T, stimulus.rot), Math.PI*2)));
-
-	return(dots);
-}
-
-function myInitStimulus(task) {
-
-	stimulus.dots = {};
-
-
-	stimulus.dots.white = '#FFFFFF';
-
-	stimulus.dots.minR = 0;
-	stimulus.dots.maxR = 9
-	stimulus.dots.minT = 0;
-	stimulus.dots.maxT = Math.PI*2;
-	stimulus.dots.n = 140;
-	stimulus.dots.T = add(multiply(rand(task,stimulus.dots.n), (stimulus.dots.maxT-stimulus.dots.minT)),stimulus.dots.minT);
-	stimulus.dots.R = add(multiply(rand(task,stimulus.dots.n), (stimulus.dots.maxR-stimulus.dots.minR)),stimulus.dots.minR);	
-	stimulus.dots.holdx =  multiply(stimulus.dots.R,cos(mod(add(stimulus.dots.T, 0), Math.PI*2)));	
-	stimulus.dots.holdy = multiply(stimulus.dots.R,sin(mod(add(stimulus.dots.T, 0), Math.PI*2)));
-
-	stimulus.dots.x = multiply(stimulus.dots.R,cos(stimulus.dots.T));
-	stimulus.dots.y = multiply(stimulus.dots.R,sin(stimulus.dots.T));
 }
