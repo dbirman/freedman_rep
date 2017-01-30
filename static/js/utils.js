@@ -10,6 +10,14 @@ function assert(exp, message) {
 	}
 }
 
+// From dots.js
+function clipCtx(ctx,canvas) {
+	ctx.save();
+	ctx.beginPath();
+	ctx.arc(canvas.width/2,canvas.height/2,canvas.width/2,0,2*Math.PI,false);
+	ctx.clip();
+}
+
 // Mean of booleans (true==1; false==0)
 function boolpercent(arr) {
 	var count = 0;
